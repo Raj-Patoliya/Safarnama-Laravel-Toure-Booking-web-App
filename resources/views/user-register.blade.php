@@ -89,6 +89,12 @@
                         <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
                             <form class="signup-page" method="POST" action="{{ route('insert.register')}}" enctype="multipart/form-data">
                                 @csrf
+                                @if(Session::has('message'))
+                                    <p class="alert" style="color:red;font-size:2rem">{{Session::get('message') }}</p>
+                                    @endif
+                                    @php 
+                                        Illuminate\Support\Facades\Session::forget('message'); 
+                                        @endphp
                                 <div class="signup-header">
                                     <h2>Register a new account</h2>
                                     <p>Already a member? Click

@@ -72,6 +72,12 @@
                                     <div class="login-header margin-bottom-30">
                                         <h2>Login to your account</h2>
                                     </div>
+                                    @if(Session::has('loginmessage'))
+                                    <p class="alert" style="color:red;font-size:2rem">{{Session::get('loginmessage') }}</p>
+                                    @endif
+                                    @php 
+                                        Illuminate\Support\Facades\Session::forget('loginmessage'); 
+                                        @endphp
                                     <div class="input-group margin-bottom-20">
                                         <span class="input-group-addon">
                                             <i class="fa fa-user"></i>

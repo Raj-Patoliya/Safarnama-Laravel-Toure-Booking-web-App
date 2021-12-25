@@ -199,7 +199,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="contact.html" class="fa-comment">Contact</a>
+                                    <a href="{{'/contact-us'}}" class="fa-comment">Contact</a>
                                 </li>
                             </ul>
                         </div>
