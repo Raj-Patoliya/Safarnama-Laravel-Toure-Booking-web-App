@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\comment;
 use App\Models\Continent;
 use App\Models\Country;
 use App\Models\post;
@@ -42,13 +43,41 @@ class UserController extends Controller
             $request->session()->put('password', $data['password']);
             $request->session()->put('images', $data['images']);
             $request->session()->put('address', $data['address']);
-            
             $posts =  post::where([
-                ['user_id', '=', $data['user_id']]
-                ])->get();
-            return view('user-profile',compact('posts'));            
+                    ['user_id', '=', $data['user_id']]
+                    ])->get();
+                
+                
+                $newdata =[];
+                    foreach ($posts as $item)
+                    {
+                        
 
-        }
+                        $data = [];
+                        $comments =  comment::where([
+                            ['post_id', '=', $item['post_id']]
+                            ])->get();
+                        $cdata = [];
+                        $i =0;
+                        foreach( $comments as $itm)
+                        {
+                            $cdata[$i]['post_id'] = $itm['post_id'];
+                            $cdata[$i]['comment_id'] = $itm['comment_id'];
+                            $cdata[$i]['user_id'] = $itm['user_id'];
+                            $cdata[$i]['comment'] = $itm['comment'];
+                            $i++;
+                        }
+                        $data['post_id'] = $item['post_id'];
+                        $data['user_id'] = $item['user_id'];
+                        $data['title'] = $item['title'];
+                        $data['description'] = $item['description'];
+                        $data['image'] = $item['attechment'];
+                        $data['comment'] = $cdata;
+                        array_push($newdata,$data);
+                    }
+                return view('user-profile',compact('newdata'));            
+            }
+    
         else
         {
             $request->session()->put('loginmessage','Invalid Login Information');        
@@ -80,7 +109,7 @@ class UserController extends Controller
         {
             $posts =  post::where([
                 ['user_id', '=', $data['user_id']]
-                ])->get();
+                ])->get(); 
             return view('user-profile',compact('posts'));
         }
     }
@@ -118,8 +147,6 @@ class UserController extends Controller
             {
                 return view('user-login');
             }
-        }
-        
+        }  
     }
-   
 }

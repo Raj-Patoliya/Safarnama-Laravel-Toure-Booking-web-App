@@ -65,7 +65,8 @@
                             </div>
                         </div>
                 </form>
-            @foreach ($posts as $item)
+        
+            @foreach ($newdata as $item)
                     <div class="profile-timeline">
                         <ul class="list-unstyled">
                             <li class="timeline-item">
@@ -76,20 +77,20 @@
                                             <p>{{Session::get('fname')}} {{Session::get('lname')}}</p>
                                         </div>
                                         <div class="timeline-item-post">
-                                            <p>{{$item->title}}</p>
-                                            {{$item->description}}
-                                            <img src="img/post/{{$item->attechment}}" alt="" />
-                                            <div class="timeline-options">
-                                                <a href="#"><i class="fa fa-thumbs-up"></i> Like (22)</a>
-                                                <a href="#"><i class="fa fa-comment"></i> Comment (7)</a>
-                                                <a href="#"><i class="fa fa-share"></i> Share (9)</a>
-                                            </div>
+                                            <p>@php echo $item['title'];@endphp</p>
+                                            @php echo $item['description'];@endphp
+                                            <img src="img/post/@php echo $item['image'];@endphp" alt="" />
+                                            
+                                                
+                                            @foreach ($item['comment'] as $itemsss)
+                                            <p>@php echo $itemsss['comment'];@endphp</p>
+                                            @endforeach
                                             <div class="timeline-comment">
                                                 <div class="timeline-comment-header">
                                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />
-                                                    <p>Memila moriya <small>1 hour ago</small></p>
+                                                    <p> <small>1 hour ago</small></p>
                                                 </div>
-                                                <p class="timeline-comment-text">Explicabo Nemo enim ipsam voluptatem quia voluptas.</p>
+                                                
                                             </div>
                                             <textarea class="form-control" placeholder="Replay"></textarea>
                                         </div>
