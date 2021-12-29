@@ -9,8 +9,8 @@ use App\Models\post;
 use App\Models\User;
 use App\Models\user_registration;
 use App\Models\UserReg;
-use Illuminate\Support\Facades\Session; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session; 
 class UserController extends Controller
 {
     /**
