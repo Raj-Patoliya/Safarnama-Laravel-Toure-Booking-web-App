@@ -75,7 +75,7 @@
                                             <p>{{Session::get('fname')}} {{Session::get('lname')}}</p>
                                         </div>
                                         <div class="timeline-item-post">
-                                            <p>@php echo $item['title'];@endphp</p>
+                                            <h3>@php echo $item['title'];@endphp</h3>
                                             @php echo $item['description'];@endphp
                                             <img src="img/post/@php echo $item['image'];@endphp" alt="" />
                                             

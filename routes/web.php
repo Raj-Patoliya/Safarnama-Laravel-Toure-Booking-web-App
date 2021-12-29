@@ -47,8 +47,8 @@ Route::get('logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/Admin-login', function () {
     return view('admin-login');
 });
-Route::get('/Admin-home', function () {
-    return view('admin-home');
-});
+Route::get('admin-home', [UserController::class, 'admin_home'])->name('admin-home');
 Route::post('admin-profile', [UserController::class, 'admin_login'])->name('admin-profile');
 Route::get('admin-user-management', [UserController::class, 'admin_user_management'])->name('admin-user-management');
+Route::get('admin-user-blog', [UserController::class, 'admin_user_blog'])->name('admin-user-blog');
+Route::get('admin-user-delete/{id}', [UserController::class, 'admin_user_delete'])->name('admin-user-delete');

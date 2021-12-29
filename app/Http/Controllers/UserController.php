@@ -23,30 +23,6 @@ class UserController extends Controller
         $continent = Continent::all();
         return view('home', compact('continent'));
     }
-public function admin_user_management(Request $req)
-{
-        if($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123')
-        { 
-            $user = user_registration::all();
-            return view('admin-user-management',compact('user'));
-        }
-        // echo $req->session()->get('email');
-        // echo $req->session()->get('password');
-}
-    public function admin_login(Request $req)
-    {
-        if($req->input('email') == 'raj@admin.com' && $req->input('password') == 'Raj@123')
-        {
-            $req->session()->put('email','raj@admin.com');        
-            $req->session()->put('password','Raj@123');
-            return view('admin-home');
-        }
-        else
-        {
-            $req->session()->put('loginmessage','Invalid Login Information');
-            return redirect('Admin-login');
-        }
-    }
     public function login(Request $request)
     {
         $data = user_registration::where([
@@ -191,5 +167,85 @@ public function admin_user_management(Request $req)
                 return view('user-login');
             }
         }  
+    }
+
+/* Admin Controls */
+
+    public function admin_user_management(Request $req)
+    {
+            if($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123')
+            { 
+                $user = user_registration::all();
+                return view('admin-user-management',compact('user'));
+            }
+            else
+            {
+                redirect('Admin-login');
+            }
+            // echo $req->session()->get('email');
+            // echo $req->session()->get('password');
+    }
+    public function admin_user_delete($id)
+    {
+        $user = user_registration::where([
+            ['user_id', '=', $id],
+        ])->delete();
+        if($user == true)
+        {
+            $post = post::where([
+                ['user_id', '=', $id],
+            ])->delete();
+            if($post == true)
+            {
+                $comments = comment::where([
+                    ['user_id','=', $id],
+                ]);
+                if($comments == true)
+                {
+                    redirect('admin-user-management');
+                }
+            }
+    } 
+    }
+    public function admin_login(Request $req)
+    {
+        if($req->input('email') == 'raj@admin.com' && $req->input('password') == 'Raj@123')
+        {
+            $req->session()->put('email','raj@admin.com');        
+            $req->session()->put('password','Raj@123');
+            return view('admin-home');
+        }
+        else
+        {
+            $req->session()->put('loginmessage','Invalid Login Information');
+            return redirect('Admin-login');
+        }
+    }
+    public function admin_user_blog(Request $req)
+    {
+        if($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123')
+        {
+            $req->session()->put('email','raj@admin.com');        
+            $req->session()->put('password','Raj@123');
+            return view('admin-user-blog');
+            echo "Hello";
+        }
+        else
+        {
+            return redirect('Admin-login');
+        }
+    }
+    public function admin_home(Request $req)
+    {
+        if($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123')
+        {
+            $req->session()->put('email','raj@admin.com');        
+            $req->session()->put('password','Raj@123');
+            return view('admin-home');
+        }
+        else
+        {
+            return redirect('Admin-login');
+        }    
     }
 }

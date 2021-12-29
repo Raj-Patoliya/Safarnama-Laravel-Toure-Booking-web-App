@@ -103,15 +103,15 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+        <a href="{{route('admin-home')}}" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="{{route('admin-user-blog')}}" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          User Blogs
+          User's Blogs
         </a>
       </li>
       <li>
@@ -127,7 +127,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="#" class="nav-link link-dark active">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           User Management
         </a>
@@ -149,7 +149,7 @@
     </div>
   </div>
   
-  <div class="card" style="width:100%;">
+  <div class="" style="width:100%;">
     <br>
     <table class='table'>
       <th scope="col">Name</th>
@@ -169,9 +169,9 @@
         <td>{{$item->email}}</td>
         <td>{{$item->password}}</td>
         <td>{{$item->phone}}</td>
-        <td>{{$item->images}}</td>
+        <td><img src="img/profiles/{{$item->images}}" style="height:100px;"alt=""></td>
         <td>{{$item->address}}</td>
-        <td><a href="#" class="btn btn-primary">Edit</a> <a href="#" class="btn btn-danger">Delete</a></td>
+        <td><a href="#" class="btn btn-primary">Edit</a> <a href="{{route('admin-user-delete',$item->user_id)}}" class="btn btn-danger">Delete</a></td>
       </tr>
       @endforeach
     </table>

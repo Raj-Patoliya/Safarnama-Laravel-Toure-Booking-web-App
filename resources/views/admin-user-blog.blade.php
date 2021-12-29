@@ -7,11 +7,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Safarnama - Admin</title>
-
-    <link rel="stylesheet" href="{{url('css/raj.css')}}">
-
-    
-
+    <link rel="stylesheet" href="{{url('css/raj.css')}}"> 
     <!-- Bootstrap core CSS -->
 <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -104,18 +100,19 @@
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <span class="fs-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| Safarnama ||</span>
     </a>
+
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="{{route('admin-home')}}" class="nav-link active" aria-current="page">
+        <a href="{{route('admin-home')}}" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
       </li>
       <li>
-        <a href="{{route('admin-user-blog')}}" class="nav-link link-dark">
+        <a href="{{route('admin-user-blog')}}" class="nav-link link-dark active">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          User Blogs
+          User's Blogs
         </a>
       </li>
       <li>
@@ -131,13 +128,13 @@
         </a>
       </li>
       <li>
-        <a href="{{route('admin-user-management')}}" class="nav-link link-dark">
+        <a href="{{route('admin-user-management')}}" class="nav-link link-dark ">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           User Management
         </a>
       </li>
     </ul>
-    <hr>
+        <hr>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -152,8 +149,7 @@
       </ul>
     </div>
   </div>
-  
-  
+</div>
 </main>
       <script src="{{url('js/sidebars.js')}}"></script>
       <script src="{{url('js/bootstrap.bundle.min.js')}}"></script>
