@@ -47,4 +47,7 @@ Route::get('logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/Admin-login', function () {
     return view('admin-login');
 });
+Route::get('/Admin-home', function () {
+    return view('admin-home');
+});
 Route::post('admin-profile', [UserController::class, 'admin_login'])->name('admin-profile');

@@ -28,7 +28,8 @@ class UserController extends Controller
     {
         if($req->input('email') == 'raj@admin.com' && $req->input('password') == 'Raj@123')
         {
-            
+            $user = user_registration::all();
+            return view('admin-home',compact('user'));       
         }
         else
         {
