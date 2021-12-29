@@ -1,12 +1,11 @@
-
+<html>
 <head>
     <link rel="stylesheet" href="{{url('css/raj.css')}}">
 </head>
     <body>
-        <div class="container">
+         <div class="container">
         <div class="page-inner no-page-title">
-        <!-- start page main wrapper -->
-           
+        <!-- start page main wrapper --> 
         <div id="main-wrapper">
             <div class="row">
                 <div class="col-lg-5 col-xl-3">
@@ -65,7 +64,6 @@
                             </div>
                         </div>
                 </form>
-        
             @foreach ($newdata as $item)
                     <div class="profile-timeline">
                         <ul class="list-unstyled">

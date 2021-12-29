@@ -14,7 +14,7 @@ use Facade\FlareClient\View;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*User's View*/
 Route::get('/', function () {
     return view('home');
 });
@@ -32,13 +32,19 @@ Route::get('/user-login', function () {
 Route::get('/contact-us', function () {
     return view('contact-us');
 });
-Route::get('/user-profile', function () {
-    return view('user-profile');
-});
+// Route::get('/user-profile', function () {
+//     return view('user-profile');
+// });
 Route::resource('/','App\Http\Controllers\UserController');
 Route::view('/about-us', 'about-us');
 Route::post('user_login', [UserController::class, 'insertRegister'])->name('insert.register');
 Route::post('store-form', [UserController::class, 'store']);
-Route::post('user_auth', [UserController::class, 'login'])->name('user.login.success');
+Route::post('profile', [UserController::class, 'login'])->name('user.login.success');
 Route::post('create_post', [UserController::class, 'post'])->name('create.post');
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
+
+/*Admin*/
+Route::get('/Admin-login', function () {
+    return view('admin-login');
+});
+Route::post('admin-profile', [UserController::class, 'admin_login'])->name('admin-profile');

@@ -82,13 +82,13 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </span>
-                                        <input placeholder="Username" name='email' class="form-control" type="text">
+                                        <input placeholder="Username" name='email' class="form-control" type="text" required>
                                     </div>
                                     <div class="input-group margin-bottom-20">
                                         <span class="input-group-addon">
                                             <i class="fa fa-lock"></i>
                                         </span>
-                                        <input placeholder="Password" name="password" class="form-control" type="password">
+                                        <input placeholder="Password" name="password" class="form-control" type="password" required>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">

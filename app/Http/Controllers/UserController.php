@@ -24,7 +24,18 @@ class UserController extends Controller
         return view('home', compact('continent'));
     }
 
-
+    public function admin_login(Request $req)
+    {
+        if($req->input('email') == 'raj@admin.com' && $req->input('password') == 'Raj@123')
+        {
+            
+        }
+        else
+        {
+            $req->session()->put('loginmessage','Invalid Login Information');
+            return redirect('Admin-login');
+        }
+    }
     public function login(Request $request)
     {
         $data = user_registration::where([
@@ -46,45 +57,40 @@ class UserController extends Controller
             $posts =  post::where([
                     ['user_id', '=', $data['user_id']]
                     ])->get();
-                
-                
-                $newdata =[];
-                    foreach ($posts as $item)
+            $newdata =[];
+                foreach ($posts as $item)
+                {
+                    $data = [];
+                    $comments =  comment::where([
+                        ['post_id', '=', $item['post_id']]
+                        ])->get();
+                    $cdata = [];
+                    $i =0;
+                    foreach( $comments as $itm)
                     {
-                        
-
-                        $data = [];
-                        $comments =  comment::where([
-                            ['post_id', '=', $item['post_id']]
-                            ])->get();
-                        $cdata = [];
-                        $i =0;
-                        foreach( $comments as $itm)
-                        {
-                            $cdata[$i]['post_id'] = $itm['post_id'];
-                            $cdata[$i]['comment_id'] = $itm['comment_id'];
-                            $cdata[$i]['user_id'] = $itm['user_id'];
-                            $cdata[$i]['comment'] = $itm['comment'];
-                            $i++;
-                        }
-                        $data['post_id'] = $item['post_id'];
-                        $data['user_id'] = $item['user_id'];
-                        $data['title'] = $item['title'];
-                        $data['description'] = $item['description'];
-                        $data['image'] = $item['attechment'];
-                        $data['comment'] = $cdata;
-                        array_push($newdata,$data);
+                        $cdata[$i]['post_id'] = $itm['post_id'];
+                        $cdata[$i]['comment_id'] = $itm['comment_id'];
+                        $cdata[$i]['user_id'] = $itm['user_id'];
+                        $cdata[$i]['comment'] = $itm['comment'];
+                        $i++;
                     }
-                return view('user-profile',compact('newdata'));            
-            }
-    
+                    $data['post_id'] = $item['post_id'];
+                    $data['user_id'] = $item['user_id'];
+                    $data['title'] = $item['title'];
+                    $data['description'] = $item['description'];
+                    $data['image'] = $item['attechment'];   
+                    $data['comment'] = $cdata;
+                    array_push($newdata,$data);
+                }
+            return view('user-profile',compact('newdata'));           
+        } 
         else
         {
-            $request->session()->put('loginmessage','Invalid Login Information');        
-            return view('user-login');
-
-        }
+            $request->session()->put('loginmessage','Invalid Login Information');
+            return redirect('/user-login');
+        }           
     }
+    
     public function logout(Request $request)
     {
         $request->session()->flush();
@@ -109,21 +115,47 @@ class UserController extends Controller
         {
             $posts =  post::where([
                 ['user_id', '=', $data['user_id']]
-                ])->get(); 
-            return view('user-profile',compact('posts'));
+                ])->get();        
+        
+        $newdata =[];
+        foreach ($posts as $item)
+        {
+            $data = [];
+            $comments =  comment::where([
+                ['post_id', '=', $item['post_id']]
+                ])->get();
+            $cdata = [];
+            $i =0;
+            foreach( $comments as $itm)
+            {
+                $cdata[$i]['post_id'] = $itm['post_id'];
+                $cdata[$i]['comment_id'] = $itm['comment_id'];
+                $cdata[$i]['user_id'] = $itm['user_id'];
+                $cdata[$i]['comment'] = $itm['comment'];
+                $i++;
+            }
+            $data['post_id'] = $item['post_id'];
+            $data['user_id'] = $item['user_id'];
+            $data['title'] = $item['title'];
+            $data['description'] = $item['description'];
+            $data['image'] = $item['attechment'];
+            $data['comment'] = $cdata;
+            array_push($newdata,$data);
         }
+    return view('user-profile',compact('newdata'));
     }
+}
 
 
     public function insertRegister(Request $req)
     {
-        $data = user_registration::where([
+        $data = user_registration::where([  
             ['email', '=', $req->email]
         ])->first();  
         if(isset($data))
         {
             $req->session()->put('message','Email Address is already exist');        
-            return view('user-register');
+            return redirect('user-register');
         }
         else
         {
