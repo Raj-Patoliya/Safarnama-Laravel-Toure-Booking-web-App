@@ -51,3 +51,4 @@ Route::get('/Admin-home', function () {
     return view('admin-home');
 });
 Route::post('admin-profile', [UserController::class, 'admin_login'])->name('admin-profile');
+Route::get('admin-user-management', [UserController::class, 'admin_user_management'])->name('admin-user-management');

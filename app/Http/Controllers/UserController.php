@@ -23,13 +23,23 @@ class UserController extends Controller
         $continent = Continent::all();
         return view('home', compact('continent'));
     }
-
+public function admin_user_management(Request $req)
+{
+        if($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123')
+        { 
+            $user = user_registration::all();
+            return view('admin-user-management',compact('user'));
+        }
+        // echo $req->session()->get('email');
+        // echo $req->session()->get('password');
+}
     public function admin_login(Request $req)
     {
         if($req->input('email') == 'raj@admin.com' && $req->input('password') == 'Raj@123')
         {
-            $user = user_registration::all();
-            return view('admin-home',compact('user'));       
+            $req->session()->put('email','raj@admin.com');        
+            $req->session()->put('password','Raj@123');
+            return view('admin-home');
         }
         else
         {

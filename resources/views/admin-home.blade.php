@@ -131,7 +131,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="{{view('admin-user-management')}}" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           User Management
         </a>
@@ -153,34 +153,7 @@
     </div>
   </div>
   
-  <div class="card" style="width:100%;">
-    <br>
-    <table class='table'>
-      <th scope="col">Name</th>
-      <th scope="col">Gender</th>
-      <th scope="col">DoB</th>
-      <th scope="col">E-Mail</th>
-      <th scope="col">Password</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Image</th>
-      <th scope="col">Address</th>
-      <th scope="col">Action</th>
-      @foreach ($user as $item)
-      <tr>
-        <td>{{$item->fname}} {{$item->lname}}</td>
-        <td>{{$item->gender}} </td>
-        <td>{{$item->dob}}</td>
-        <td>{{$item->email}}</td>
-        <td>{{$item->password}}</td>
-        <td>{{$item->phone}}</td>
-        <td>{{$item->images}}</td>
-        <td>{{$item->address}}</td>
-        <td><a href="#" class="btn btn-primary">Edit</a> <a href="#" class="btn btn-danger">Delete</a></td>
-      </tr>
-      @endforeach
-    </table>
-  </div>
-</div>
+  
 </main>
       <script src="{{url('js/sidebars.js')}}"></script>
       <script src="{{url('js/bootstrap.bundle.min.js')}}"></script>

@@ -7,11 +7,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Safarnama - Admin</title>
-
-    <link rel="stylesheet" href="{{url('css/raj.css')}}">
-
-    
-
+    <link rel="stylesheet" href="{{url('css/raj.css')}}"> 
     <!-- Bootstrap core CSS -->
 <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
 
