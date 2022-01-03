@@ -51,4 +51,4 @@ Route::post('admin-profile', [UserController::class, 'admin_login'])->name('admi
 Route::get('admin-user-management', [UserController::class, 'admin_user_management'])->name('admin-user-management');
 Route::get('admin-user-blog', [UserController::class, 'admin_user_blog'])->name('admin-user-blog');
 Route::get('admin-user-delete/{id}', [UserController::class, 'admin_user_delete'])->name('admin-user-delete');
-Route::get('admin-user-profile-edit/{id}', [UserController::class, 'admin_user_profile_edit'])->name('admin-user-profile-edit');
+Route::get('admin-user-blog-edit/{id}', [UserController::class, 'admin_user_blog_edit'])->name('admin-user-blog-edit');

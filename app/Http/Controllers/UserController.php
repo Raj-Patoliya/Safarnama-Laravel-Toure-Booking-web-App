@@ -205,22 +205,13 @@ class UserController extends Controller
             }
     } 
     }
-    public function admin_user_profile_edit(Request $req,$id)
+    public function admin_user_blog_edit($id)
     {
-        if($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123')
-            { 
-                $data = user_registration::where([  
-                    ['user_id', '=', $id]
-                ])->first();
-                return view('admin-user-profile-edit', compact('data'));
-                    // echo "";
-                    // print_r($data);
-            }
-            else
-            {
-                return redirect('/');
-            }
-        
+        $data = post::where([
+            ['user_id', '=',$id],
+        ])->get();
+        echo "<pre>";
+        print_r($data);
     }
     public function admin_login(Request $req)
     {
