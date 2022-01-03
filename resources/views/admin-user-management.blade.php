@@ -171,7 +171,7 @@
         <td>{{$item->phone}}</td>
         <td><img src="img/profiles/{{$item->images}}" style="height:100px;"alt=""></td>
         <td>{{$item->address}}</td>
-        <td><a href="#" class="btn btn-primary">Edit</a> <a href="{{route('admin-user-delete',$item->user_id)}}" class="btn btn-danger">Delete</a></td>
+        <td><a href="{{route('admin-user-profile-edit',$item->user_id)}}" class="btn btn-primary">Edit</a> <a href="{{route('admin-user-delete',$item->user_id)}}" class="btn btn-danger">Delete</a></td>
       </tr>
       @endforeach
     </table>
@@ -180,10 +180,5 @@
 </main>
       <script src="{{url('js/sidebars.js')}}"></script>
       <script src="{{url('js/bootstrap.bundle.min.js')}}"></script>
-      <script>
-        $(document).ready(function() {
-          $('#table').DataTable();
-      } );
-       </script>
   </body>
 </html>

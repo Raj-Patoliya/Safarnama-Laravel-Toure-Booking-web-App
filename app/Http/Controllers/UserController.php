@@ -180,10 +180,8 @@ class UserController extends Controller
             }
             else
             {
-                redirect('Admin-login');
+                redirect('/');
             }
-            // echo $req->session()->get('email');
-            // echo $req->session()->get('password');
     }
     public function admin_user_delete($id)
     {
@@ -207,6 +205,23 @@ class UserController extends Controller
             }
     } 
     }
+    public function admin_user_profile_edit(Request $req,$id)
+    {
+        if($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123')
+            { 
+                $data = user_registration::where([  
+                    ['user_id', '=', $id]
+                ])->first();
+                return view('admin-user-profile-edit', compact('data'));
+                    // echo "";
+                    // print_r($data);
+            }
+            else
+            {
+                return redirect('/');
+            }
+        
+    }
     public function admin_login(Request $req)
     {
         if($req->input('email') == 'raj@admin.com' && $req->input('password') == 'Raj@123')
@@ -228,11 +243,10 @@ class UserController extends Controller
             $req->session()->put('email','raj@admin.com');        
             $req->session()->put('password','Raj@123');
             return view('admin-user-blog');
-            echo "Hello";
         }
         else
         {
-            return redirect('Admin-login');
+            return redirect('/');
         }
     }
     public function admin_home(Request $req)
@@ -245,7 +259,7 @@ class UserController extends Controller
         }
         else
         {
-            return redirect('Admin-login');
+            return redirect('/');
         }    
     }
 }

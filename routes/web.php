@@ -28,7 +28,6 @@ Route::get('/register', function () {
 Route::get('/user-login', function () {
     return view('user-login');
 });
-
 Route::get('/contact-us', function () {
     return view('contact-us');
 });
@@ -52,3 +51,4 @@ Route::post('admin-profile', [UserController::class, 'admin_login'])->name('admi
 Route::get('admin-user-management', [UserController::class, 'admin_user_management'])->name('admin-user-management');
 Route::get('admin-user-blog', [UserController::class, 'admin_user_blog'])->name('admin-user-blog');
 Route::get('admin-user-delete/{id}', [UserController::class, 'admin_user_delete'])->name('admin-user-delete');
+Route::get('admin-user-profile-edit/{id}', [UserController::class, 'admin_user_profile_edit'])->name('admin-user-profile-edit');
