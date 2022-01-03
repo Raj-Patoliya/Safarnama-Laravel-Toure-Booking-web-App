@@ -15,5 +15,6 @@ class post extends Model
         'title',
         'attechment',
         'description',
+        'status',
     ];
 }

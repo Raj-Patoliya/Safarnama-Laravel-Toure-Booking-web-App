@@ -96,7 +96,7 @@ class UserController extends Controller
         $data['title'] = $req->input('title');
         $data['description'] = $req->input('description');
         $data['attechment'] = $Filename;
-
+        $data['status'] = 'pending';
         $insert = post::create($data);
         if(isset($insert) == true)
         {
@@ -205,13 +205,14 @@ class UserController extends Controller
             }
     } 
     }
-    public function admin_user_blog_edit($id)
+    public function admin_user_blog_list($id)
     {
         $data = post::where([
             ['user_id', '=',$id],
         ])->get();
         echo "<pre>";
-        print_r($data);
+        // print_r($data);
+        return view('admin-user-blog-list',compact($data));
     }
     public function admin_login(Request $req)
     {

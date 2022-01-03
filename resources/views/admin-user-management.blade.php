@@ -153,25 +153,17 @@
     <br>
     <table class='table'>
       <th scope="col">Name</th>
-      <th scope="col">Gender</th>
-      <th scope="col">DoB</th>
       <th scope="col">E-Mail</th>
-      <th scope="col">Password</th>
       <th scope="col">Phone</th>
       <th scope="col">Image</th>
-      <th scope="col">Address</th>
       <th scope="col">Action</th>
       @foreach ($user as $item)
       <tr>
         <td>{{$item->fname}} {{$item->lname}}</td>
-        <td>{{$item->gender}} </td>
-        <td>{{$item->dob}}</td>
         <td>{{$item->email}}</td>
-        <td>{{$item->password}}</td>
         <td>{{$item->phone}}</td>
-        <td><img src="img/profiles/{{$item->images}}" style="height:100px;"alt=""></td>
-        <td>{{$item->address}}</td>
-        <td><a href="{{route('admin-user-blog-edit',$item->user_id)}}" class="btn btn-primary">Blogs</a> <a href="{{route('admin-user-delete',$item->user_id)}}" class="btn btn-danger">Delete</a></td>
+        <td><img src="img/profiles/{{$item->images}}" style="height:100px;width:100px;border-radius:50%;"alt=""></td>
+        <td><a href="{{route('admin-user-blog-list',$item->user_id)}}" class="btn btn-primary">Blogs</a> <a href="{{route('admin-user-delete',$item->user_id)}}" class="btn btn-danger">Delete</a></td>
       </tr>
       @endforeach
     </table>

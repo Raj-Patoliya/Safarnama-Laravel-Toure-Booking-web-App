@@ -19,6 +19,7 @@ class CreatePostTable extends Migration
             $table->text('title')->nullable();
             $table->text('description')->nullable();
             $table->string('attechment')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
