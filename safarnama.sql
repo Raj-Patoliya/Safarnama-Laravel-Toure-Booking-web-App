@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2021 at 02:08 PM
+-- Generation Time: Dec 29, 2021 at 10:28 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -31,8 +31,17 @@ CREATE TABLE `comment` (
   `comment_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `comment` int(11) NOT NULL
+  `comment` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `post_id`, `user_id`, `comment`) VALUES
+(1, 5, 16, 'Hello world'),
+(2, 5, 16, 'Hello Raj'),
+(3, 5, 16, 'Amit');
 
 -- --------------------------------------------------------
 
@@ -146,13 +155,7 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`post_id`, `user_id`, `title`, `description`, `attechment`, `updated_at`, `created_at`) VALUES
-(5, 16, 'Costa Brava Divers', '<h1>Best Scuba Diving experience</h1>\r\n\r\n<p>we had gone for scuba diving and snorkeling with them. they are thorough professionals in their work and are very warm in nature too. Ana was our guide and host and she took care of us amazingly well. we were given proper gear to scuba dive and they were lots of people with us, mostly professionals who guided us well. we had our camera but it was not waterproof and to our delight they even took their cameras along just to get some photos clicked underwater for us. overall it was a great day spent with them. i will go again to them for sure. we paid roughly 83euros for both the activities and it took about 4 hours in total. they do give a break in between the two activities.</p>', '1640431637.jpg', '2021-12-25 16:57:17', '2021-12-25 16:57:17'),
-(6, 16, 'Best Scuba Diving experience', '<p>It all started with the plan of my friend (Vaibhav) who wanted to do Sara Umga Pass together. But as per Covid-19 situation arising in the country, he was not able to make it and I had been bore enough from past 3 months at my stay in Manali that I decided to take up the plan and start the journey with Ramu ji and Bijju [with whom i had been trekking since the past 6 years]. Ramu ji had been trekking in Manali, Lahaul, Spiti, Zanskar and Leh valley from past 30 years and had a lot of trekking experience. There was not any route in these valleys which he had not been to. People like him fascinate me a lot for their experience and I find myself quite fortunate trekking along with them. Bijju was younger to me in age and had been a close mate since the time was in Himachal. Being a small team, and knowing each other so well we were quite confident with the plan.</p>\r\n\r\n<p>We made an exact list of all the stay gear, rations, clothes and other equipment with their weights, distributed it among ourselves and packed our bags. It came out to be 19 kg for myself, 18.3 kg for Bijju and 13.5 kg for Ramu ji [whom we wanted to keep light for his age].</p>\r\n\r\n<p>The night was going to be sleepless for the usual anxiousness that gets built inside you before such a journey where you don&rsquo;t know how things will be.</p>', '1640432736.jpg', '2021-12-25 17:15:36', '2021-12-25 17:15:36'),
-(7, 16, 'Hello World', '<p>Hello World Hell Brother</p>', '1640435364.jpg', '2021-12-25 17:59:24', '2021-12-25 17:59:24'),
-(8, 16, 'Hello World', '<p>Hello World Hell Brother</p>', '1640435383.jpg', '2021-12-25 17:59:43', '2021-12-25 17:59:43'),
-(9, 16, 'Hello World', '<p>Hello World Hell Brother</p>', '1640435555.jpg', '2021-12-25 18:02:35', '2021-12-25 18:02:35'),
-(10, 16, 'dscsasdcsa', '<p>asdadad</p>', '1640436009.jpg', '2021-12-25 18:10:09', '2021-12-25 18:10:09'),
-(11, 16, 'dscsasdcsa', '<p>asdadad</p>', '1640436098.jpg', '2021-12-25 18:11:38', '2021-12-25 18:11:38');
+(23, 33, 'High Altitude Run on Pin Parvati Pass', '<p>One Saturday evening met my running buddies, during the discussion one guy suggested for high altitude trek plan instead of Satara run this year.&nbsp; Curiosity kills the cat, started listing to his previous trek experience and without any knowledge of trek, I signed in for difficult High altitude Himalayas trek.&nbsp;&nbsp;</p>\r\n\r\n<p>I simply compared trekking challenges with marathon (both are different skill altogether), since I&rsquo;ve done several half marathons, hill&nbsp; marathon now ready to test trekking endurance so excited with the new expedition, a group was formed, we invited our other friends, shortlisted &ldquo;Pin Parvati Pass&rdquo; all I&nbsp; know was this is not easy trek. Most of the folks in the group are first-time trekkers, as per advisory this is not a recommended trek for beginners, but decided to take this risk.</p>\r\n\r\n<p><br />\r\nAlmost 12 people signed in for this trek but later 7 folks showed up,&nbsp; the trek was planned between 13 Sep to 24 Sep 2018. Landed in Decathlon with my friends for shopping, the list is big couldn&rsquo;t complete in a single day. Rejoined my running group (Joints &amp; Motions) to improve fitness level.</p>', '1640811280.jpg', '2021-12-30 02:24:40', '2021-12-30 02:24:40');
 
 -- --------------------------------------------------------
 
@@ -205,11 +208,9 @@ CREATE TABLE `user_registrations` (
 --
 
 INSERT INTO `user_registrations` (`user_id`, `fname`, `lname`, `gender`, `dob`, `email`, `phone`, `password`, `images`, `address`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(15, 'Raj', 'Patel', 'male', '2021-10-20', 'raj.p@engees.in', '7410852963', '12345678', '1640344258.jpg', 'Surat Gujarat India', NULL, NULL, '2021-12-23 11:49:04', '2021-12-23 11:49:04'),
-(16, 'Raj', 'Patel', 'male', '1999-06-23', 'rajpatel@gmail.com', '7410852963', '12345678', '1640265094.jpg', 'Surat Gujarat', NULL, NULL, '2021-12-23 13:11:34', '2021-12-23 13:11:34'),
-(22, 'Amit', 'Singh', 'male', '2000-03-02', 'amit@gmail.com', '7410852963', '123', '1640342357.jpg', 'Surat Gujarat India', NULL, NULL, '2021-12-24 10:39:17', '2021-12-24 10:39:17'),
-(23, 'Chetan', 'Chhajer', 'male', '1999-01-01', 'chetan@gmail.com', '7410852963', '111', '1640344258.jpg', 'Surat', NULL, NULL, '2021-12-24 11:10:58', '2021-12-24 11:10:58'),
-(24, 'Naveen', 'Panjala', 'male', '2000-03-03', 'naveen@panajala.com', '7410852963', '12345678', '1640415287.jpg', 'Surat Gujarat India', NULL, NULL, '2021-12-25 06:54:47', '2021-12-25 06:54:47');
+(33, 'Naveen', 'Panjala', 'male', '2000-03-01', 'naveen@panajala.com', '7418529630', '12345678', '1640810691.jpg', 'Surat Gujarat India', NULL, NULL, '2021-12-29 20:44:51', '2021-12-29 20:44:51'),
+(34, 'Ditya', 'Patel', 'female', '2001-02-28', 'ditya@patel.com', '7410852369', '12345678', '1640811983.jpg', 'Surat Gujarat India', NULL, NULL, '2021-12-29 21:06:23', '2021-12-29 21:06:23'),
+(35, 'Amit', 'Singh', 'male', '1999-07-03', 'amit@singh.com', '9638527410', '12345678', '1640812094.jpg', 'Mumbai Maharastra India', NULL, NULL, '2021-12-29 21:08:14', '2021-12-29 21:08:14');
 
 --
 -- Indexes for dumped tables
@@ -276,7 +277,7 @@ ALTER TABLE `user_registrations`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -294,13 +295,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user_registrations`
 --
 ALTER TABLE `user_registrations`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
