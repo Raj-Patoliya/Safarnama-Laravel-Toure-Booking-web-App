@@ -78,8 +78,6 @@
                                             <h3>@php echo $item['title'];@endphp</h3>
                                             @php echo $item['description'];@endphp
                                             <img src="img/post/@php echo $item['image'];@endphp" alt="" />
-                                            
-                                                
                                             @foreach ($item['comment'] as $itemsss)
                                             <p>@php echo $itemsss['comment'];@endphp</p>
                                             @endforeach

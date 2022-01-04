@@ -417,7 +417,6 @@
     <script>
         $( document ).ready(function() {
    $("#medical").click(function (){
-
    });
 });
     </script>

@@ -43,14 +43,14 @@ class UserController extends Controller
             $request->session()->put('address', $data['address']);
             $posts =  post::where([
                     ['user_id', '=', $data['user_id']]
-                    ])->get();
+                    ])->orderBy('post_id', 'desc')->get();
             $newdata =[];
                 foreach ($posts as $item)
                 {
                     $data = [];
                     $comments =  comment::where([
                         ['post_id', '=', $item['post_id']]
-                        ])->get();
+                        ])->orderBy('comment_id', 'desc')->get();
                     $cdata = [];
                     $i =0;
                     foreach( $comments as $itm)
@@ -102,7 +102,7 @@ class UserController extends Controller
         {
             $posts =  post::where([
                 ['user_id', '=', $data['user_id']]
-                ])->get();        
+                ])->orderBy('post_id', 'desc')->get();        
         
         $newdata =[];
         foreach ($posts as $item)
@@ -207,12 +207,16 @@ class UserController extends Controller
     }
     public function admin_user_blog_list($id)
     {
-        $data = post::where([
-            ['user_id', '=',$id],
-        ])->get();
-        echo "<pre>";
-        // print_r($data);
-        return view('admin-user-blog-list',compact($data));
+        $data =  post::where([
+            ['user_id', '=', $id]
+            ])->get();  
+        // $cdata = user_registration::where([
+        //     ['user_id','=',$id],
+        // ])->first();
+            // $data['user_name'] = $cdata['fname'].' '.$cdata['lname'];
+            // echo "<pre>";
+            // print_r($posts);
+        return view('admin-user-blog-list',compact('data'));
     }
     public function admin_login(Request $req)
     {
