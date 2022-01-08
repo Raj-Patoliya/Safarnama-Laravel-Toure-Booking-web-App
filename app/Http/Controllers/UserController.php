@@ -77,7 +77,6 @@ class UserController extends Controller
             return redirect('/user-login');
         }           
     }
-    
     public function logout(Request $request)
     {
         $request->session()->flush();
@@ -180,38 +179,26 @@ class UserController extends Controller
             }
             else
             {
-                redirect('/');
+                return redirect('/');
             }
     }
-    public function admin_user_delete($id)
+    public function admin_user_blog_list(Request $req,$id)
     {
-        $user = user_registration::where([
-            ['user_id', '=', $id],
-        ])->delete();
-        if($user == true)
+        if($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123')
+        { 
+            $data =  post::where([
+                ['user_id', '=', $id]
+                ])->get();
+            return view('admin-user-blog-list',compact('data'));
+        }
+        else
         {
-            $post = post::where([
-                ['user_id', '=', $id],
-            ])->delete();
-            if($post == true)
-            {
-                $comments = comment::where([
-                    ['user_id','=', $id],
-                ]);
-                if($comments == true)
-                {
-                    redirect('admin-user-management');
-                }
-            }
-    } 
+            
+            return redirect('/');
+        }
+        
     }
-    public function admin_user_blog_list($id)
-    {
-        $data =  post::where([
-            ['user_id', '=', $id]
-            ])->get();
-        return view('admin-user-blog-list',compact('data'));
-    }
+
     public function admin_user_blog_status($id)
     {
             $data =  post::where([
@@ -244,9 +231,15 @@ class UserController extends Controller
                 {
                     return redirect()->route('admin-user-blog-list', [$userid]);
                 }
-            }
-                
-        }
+            }            
+    }
+    public function admin_user_blog_read($id)
+    {
+        $data = post::where([
+            ['post_id','=',$id]
+        ])->get();
+        return view('admin-user-blog-read',compact('data'));
+    }
     public function admin_login(Request $req)
     {
         if($req->input('email') == 'raj@admin.com' && $req->input('password') == 'Raj@123')

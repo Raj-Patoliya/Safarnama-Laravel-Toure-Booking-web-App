@@ -140,10 +140,6 @@
         <strong>Safarnama</strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="#">Sign out</a></li>
       </ul>
     </div>
@@ -152,22 +148,11 @@
   <div class="" style="width:100%;overflow:scroll">
     <br>
     <table class='table'>
-    <tr>
-        <th scope="col">Post Title</th>
-        <th scope="col">Images</th>
-        <th scope="col">Status</th>
-    </tr>
         @foreach ($data as $item)
-      <div>
-      <tr>
-          <td>{{$item->title}}</td>
-          <td><img src="http://localhost:8000/img/post/{{$item->attechment}}" style="height:100px;width:100px;border-radius:50%;"alt=""></td>
-          <td>
-              <a href="{{route('admin-user-blog-status',$item->post_id)}}" class="btn @php if($item['status'] == 'active'){echo"btn-success";}else{echo"btn-warning";} @endphp ">{{$item->status}}</a> 
-              <a href="{{route('admin-user-blog-read',$item->post_id)}}" class="btn btn-primary">Read Blog</a> 
-          </td>
-      </tr>
-    </div>
+        <tr><h2>{{$item->title}}</h2></tr>
+        <tr><img src="http://localhost:8000/img/post/{{$item->attechment}}" style="height:50%;width:50%;"alt=""></tr>
+          <tr></tr>
+          <tr>@php echo $item['description']; @endphp</tr>
       @endforeach
     </table>
   </div>
