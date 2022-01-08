@@ -52,3 +52,4 @@ Route::get('admin-user-management', [UserController::class, 'admin_user_manageme
 Route::get('admin-user-blog', [UserController::class, 'admin_user_blog'])->name('admin-user-blog');
 Route::get('admin-user-delete/{id}', [UserController::class, 'admin_user_delete'])->name('admin-user-delete');
 Route::get('admin-user-blog-list/{id}', [UserController::class, 'admin_user_blog_list'])->name('admin-user-blog-list');
+Route::get('admin-user-blog-status/{id}', [UserController::class, 'admin_user_blog_status'])->name('admin-user-blog-status');

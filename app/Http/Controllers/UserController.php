@@ -129,7 +129,7 @@ class UserController extends Controller
             $data['comment'] = $cdata;
             array_push($newdata,$data);
         }
-    return view('user-profile',compact('newdata'));
+    return redirect('user-profile',compact('newdata'));
     }
 }
 
@@ -209,15 +209,44 @@ class UserController extends Controller
     {
         $data =  post::where([
             ['user_id', '=', $id]
-            ])->get();  
-        // $cdata = user_registration::where([
-        //     ['user_id','=',$id],
-        // ])->first();
-            // $data['user_name'] = $cdata['fname'].' '.$cdata['lname'];
-            // echo "<pre>";
-            // print_r($posts);
+            ])->get();
         return view('admin-user-blog-list',compact('data'));
     }
+    public function admin_user_blog_status($id)
+    {
+            $data =  post::where([
+            ['post_id', '=', $id]
+            ])->get();
+            $userid = '';
+            $status = '';
+            foreach($data as $data)
+            {
+                $userid = $data['user_id'];
+                $status= $data['status'];
+            }
+            if($status == 'active')
+            {
+                $update =  post::where([
+                ['post_id', '=', $id]
+                ])->update(['status' => 'pending']);
+                if($update == true)
+                {
+                    
+                    return redirect()->route('admin-user-blog-list', [$userid]);
+                }
+            }
+            else
+            {
+                $update =  post::where([
+                ['post_id', '=', $id]
+                ])->update(['status' => 'active']);
+                if($update == true)
+                {
+                    return redirect()->route('admin-user-blog-list', [$userid]);
+                }
+            }
+                
+        }
     public function admin_login(Request $req)
     {
         if($req->input('email') == 'raj@admin.com' && $req->input('password') == 'Raj@123')
