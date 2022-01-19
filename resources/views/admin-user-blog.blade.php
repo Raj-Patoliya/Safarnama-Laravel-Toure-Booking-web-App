@@ -146,6 +146,33 @@
     </div>
   </div>
 </div>
+
+<div class="" style="width:100%;overflow:scroll">
+  <br>
+  <table class='table'>
+    <tr>
+      <th scope="col">Post Title</th>
+      <th scope="col">Images</th>
+      <th scope="col">Author</th>
+      <th scope="col">Actions</th>
+  </tr>
+  @foreach ($newdata as $item)
+    <tr>
+      <td>@php echo $item['title']; @endphp </td>
+      <td><img src="http://localhost:8000/img/post/@php echo $item['image'];@endphp" style="height:100px;width:100px;border-radius:50%;"alt=""></td>
+      <td>@php 
+        foreach ($item['authorname'] as $value) {
+          echo $value['name'];
+        }
+       @endphp </td>
+      <td> <a href="admin-users-blog-status/@php echo $item['post_id'] @endphp"  class="btn @php if($item['status'] == 'active'){echo"btn-success";}else{echo"btn-warning";} @endphp"> @php echo $item['status']; @endphp </a>
+      <a href="admin-user-blog-read/@php echo $item['post_id']; @endphp" class="btn btn-primary">Read Blog</a> </td>
+    </tr>
+    @endforeach
+  </table>
+</div>
+</div>
+
 </main>
       <script src="{{url('js/sidebars.js')}}"></script>
       <script src="{{url('js/bootstrap.bundle.min.js')}}"></script>

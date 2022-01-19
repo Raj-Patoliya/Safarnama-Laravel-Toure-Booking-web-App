@@ -233,6 +233,41 @@ class UserController extends Controller
                 }
             }            
     }
+    public function admin_users_blog_status($id)
+    {
+            $data =  post::where([
+            ['post_id', '=', $id]
+            ])->get();
+            $userid = '';
+            $status = '';
+            foreach($data as $data)
+            {
+                $userid = $data['user_id'];
+                $status= $data['status'];
+            }
+            if($status == 'active')
+            {
+                $update =  post::where([
+                ['post_id', '=', $id]
+                ])->update(['status' => 'pending']);
+                if($update == true)
+                {
+                    
+                    return redirect()->route('admin-user-blog');
+                }
+            }
+            else
+            {
+                $update =  post::where([
+                ['post_id', '=', $id]
+                ])->update(['status' => 'active']);
+                if($update == true)
+                {
+                    return redirect()->route('admin-user-blog');
+                }
+            }            
+    }
+
     public function admin_user_blog_read($id)
     {
         $data = post::where([
@@ -260,7 +295,32 @@ class UserController extends Controller
         {
             $req->session()->put('email','raj@admin.com');        
             $req->session()->put('password','Raj@123');
-            return view('admin-user-blog');
+            $data = post::orderBy('post_id', 'desc')->get();
+            $newdata =[];
+                foreach ($data as $item)
+                {
+                    
+                    
+                    $datass['post_id'] = $item['post_id'];
+                    $datass['user_id'] = $item['user_id'];
+                    $datass['title'] = $item['title'];
+                    $datass['description'] = $item['description'];
+                    $datass['image'] = $item['attechment'];  
+                    $datass['image'] = $item['attechment'];   
+                    $datass['status'] = $item['status'];   
+                    $author = user_registration::where([
+                        ['user_id','=',$item['user_id']],
+                        ])->get();
+                        $authorname = [];
+                        $i=0;
+                        foreach($author as $item)
+                        {
+                            $authorname[$i++]['name'] = $item['fname'].' '.$item['lname'];
+                        }
+                        $datass['authorname'] = $authorname;
+                    array_push($newdata,$datass);
+                }                
+                return view('admin-user-blog',compact('newdata'));
         }
         else
         {
@@ -280,4 +340,11 @@ class UserController extends Controller
             return redirect('/');
         }    
     }
+    public function apis()
+    {
+        $author = user_registration::all();
+        return $author;
+        // return response()->json(['author'=>$author],200);
+    }
+
 }

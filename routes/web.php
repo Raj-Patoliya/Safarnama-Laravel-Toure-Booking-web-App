@@ -54,3 +54,7 @@ Route::get('admin-user-delete/{id}', [UserController::class, 'admin_user_delete'
 Route::get('admin-user-blog-list/{id}', [UserController::class, 'admin_user_blog_list'])->name('admin-user-blog-list');
 Route::get('admin-user-blog-status/{id}', [UserController::class, 'admin_user_blog_status'])->name('admin-user-blog-status');
 Route::get('admin-user-blog-read/{id}', [UserController::class, 'admin_user_blog_read'])->name('admin-user-blog-read');
+Route::get('admin-users-blog-status/{id}', [UserController::class, 'admin_users_blog_status'])->name('admin-users-blog-status');
+Route::get('apis', function () {
+    return view('/');
+});
