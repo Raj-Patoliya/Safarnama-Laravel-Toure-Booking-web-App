@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2021 at 10:28 PM
+-- Generation Time: Jan 20, 2022 at 10:56 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -39,9 +39,7 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`comment_id`, `post_id`, `user_id`, `comment`) VALUES
-(1, 5, 16, 'Hello world'),
-(2, 5, 16, 'Hello Raj'),
-(3, 5, 16, 'Amit');
+(1, 92, 33, 'Thanks for sharing your expierence');
 
 -- --------------------------------------------------------
 
@@ -146,6 +144,7 @@ CREATE TABLE `post` (
   `title` text NOT NULL,
   `description` text NOT NULL,
   `attechment` varchar(255) NOT NULL,
+  `status` varchar(20) NOT NULL,
   `updated_at` varchar(255) NOT NULL,
   `created_at` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -154,8 +153,10 @@ CREATE TABLE `post` (
 -- Dumping data for table `post`
 --
 
-INSERT INTO `post` (`post_id`, `user_id`, `title`, `description`, `attechment`, `updated_at`, `created_at`) VALUES
-(23, 33, 'High Altitude Run on Pin Parvati Pass', '<p>One Saturday evening met my running buddies, during the discussion one guy suggested for high altitude trek plan instead of Satara run this year.&nbsp; Curiosity kills the cat, started listing to his previous trek experience and without any knowledge of trek, I signed in for difficult High altitude Himalayas trek.&nbsp;&nbsp;</p>\r\n\r\n<p>I simply compared trekking challenges with marathon (both are different skill altogether), since I&rsquo;ve done several half marathons, hill&nbsp; marathon now ready to test trekking endurance so excited with the new expedition, a group was formed, we invited our other friends, shortlisted &ldquo;Pin Parvati Pass&rdquo; all I&nbsp; know was this is not easy trek. Most of the folks in the group are first-time trekkers, as per advisory this is not a recommended trek for beginners, but decided to take this risk.</p>\r\n\r\n<p><br />\r\nAlmost 12 people signed in for this trek but later 7 folks showed up,&nbsp; the trek was planned between 13 Sep to 24 Sep 2018. Landed in Decathlon with my friends for shopping, the list is big couldn&rsquo;t complete in a single day. Rejoined my running group (Joints &amp; Motions) to improve fitness level.</p>', '1640811280.jpg', '2021-12-30 02:24:40', '2021-12-30 02:24:40');
+INSERT INTO `post` (`post_id`, `user_id`, `title`, `description`, `attechment`, `status`, `updated_at`, `created_at`) VALUES
+(27, 36, 'Here is My first Blog', '<p>zfxgchjbkm</p>\r\n\r\n<p>gxfchvjbknm.,</p>\r\n\r\n<p>vfdcxwefdscx</p>\r\n\r\n<p>dsxz</p>\r\n\r\n<p>dsxz</p>\r\n\r\n<p>dsxz</p>\r\n\r\n<p>dsxz</p>', '1641204918.jpg', 'active', '2022-01-03 15:45:18', '2022-01-03 15:45:18'),
+(28, 36, 'Here is My first Blog', '<p>zfxgchjbkm</p>\r\n\r\n<p>gxfchvjbknm.,</p>\r\n\r\n<p>vfdcxwefdscx</p>\r\n\r\n<p>dsxz</p>\r\n\r\n<p>dsxz</p>\r\n\r\n<p>dsxz</p>\r\n\r\n<p>dsxz</p>', '1641208833.jpg', 'pending', '2022-01-08 13:45:26', '2022-01-03 16:50:33'),
+(92, 33, 'FAQs – Hampta Pass and Chandratal Trek| Manali | Spiti Valley', '<p><a href=\"https://kailashrath.com/tour/hamta-pass-chandrataal-trek/\">Hamta Pass Trek</a>&nbsp;is perfect if what you love is Snow. Snow clad mountains enclosing on all sides makes you hypnotized in the lap of nature. Attractive landscapes and glacial valleys embellish the trail that leads to the Hampta Pass.<br />\r\nDuring May &ndash; June the route from Balu ka ghera camp till Hamta pass is completely covered in snow. Here you walk right on top of a stream, covered with a thick layer of snow and ice and you can hear the sound of stream gushing down beneath your feet.</p>\r\n\r\n<p>There are two best seasons to do the Hamta Pass and Chandratal Lake trek.<br />\r\nFirst is between June to July.<br />\r\nSecond is between August-October.</p>\r\n\r\n<p>In June the route from Balu ka ghera camp till Hamta pass is completely covered in snow. Here you walk right on top of a stream, covered with a thick layer of snow and ice and you can hear the sound of stream gushing down beneath your feet. There are chances that you witness snowfall while crossing the pass.?</p>\r\n\r\n<p>While in Aug-Sept you will get no snow but more of streams to cross through and the landscape will be lush green and full of flowers in Aug-Sept. During this period, trekkers can enjoy the clear views of snow-capped mountains.</p>', '1642670948.jpg', 'pending', '2022-01-20 14:59:08', '2022-01-20 14:59:08');
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,8 @@ CREATE TABLE `user_registrations` (
 INSERT INTO `user_registrations` (`user_id`, `fname`, `lname`, `gender`, `dob`, `email`, `phone`, `password`, `images`, `address`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
 (33, 'Naveen', 'Panjala', 'male', '2000-03-01', 'naveen@panajala.com', '7418529630', '12345678', '1640810691.jpg', 'Surat Gujarat India', NULL, NULL, '2021-12-29 20:44:51', '2021-12-29 20:44:51'),
 (34, 'Ditya', 'Patel', 'female', '2001-02-28', 'ditya@patel.com', '7410852369', '12345678', '1640811983.jpg', 'Surat Gujarat India', NULL, NULL, '2021-12-29 21:06:23', '2021-12-29 21:06:23'),
-(35, 'Amit', 'Singh', 'male', '1999-07-03', 'amit@singh.com', '9638527410', '12345678', '1640812094.jpg', 'Mumbai Maharastra India', NULL, NULL, '2021-12-29 21:08:14', '2021-12-29 21:08:14');
+(35, 'Amit', 'Singh', 'male', '1999-07-03', 'amit@singh.com', '9638527410', '12345678', '1640812094.jpg', 'Mumbai Maharastra India', NULL, NULL, '2021-12-29 21:08:14', '2021-12-29 21:08:14'),
+(36, 'Vatsal', 'Gajjar', 'male', '1999-01-01', 'vatsal@gajjar.com', '7418529630', '12345678', '1641204883.jpg', 'Adajan Surat Gujarat', NULL, NULL, '2022-01-03 10:14:43', '2022-01-03 10:14:43');
 
 --
 -- Indexes for dumped tables
@@ -295,13 +297,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `user_registrations`
 --
 ALTER TABLE `user_registrations`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
