@@ -17,7 +17,7 @@ use Facade\FlareClient\View;
 /*User's View*/
 Route::view('/', 'home');
 Route::view('/Blog','single-blog');
-Route::view('/register','user-register');
+// Route::view('/register','user-register');
 Route::view('/user-login','user-login');
 Route::view('/user-login', 'user-login');
 Route::view('/contact-us','contact-us');
@@ -33,20 +33,34 @@ Route::match(['get', 'post'],'profile', [UserController::class, 'login'])->name(
 Route::post('create_post', [UserController::class, 'post'])->name('create.post');
 Route::get('delete-post/{id}', [UserController::class, 'delete_post'])->name('delete-post');
 Route::get('eid-post/{id}', [UserController::class, 'edit_post'])->name('edit-post');
-Route::get('logout', [UserController::class, 'logout'])->name('logout');
+Route::get('user-logout', [UserController::class, 'logout'])->name('user-logout');
+Route::get('edit-profile/{id}', [UserController::class, 'edit_profile'])->name('edit-profile');
+Route::post('update-profile', [UserController::class, 'update_profile'])->name('update-profile');
 
 
-/*Admin*/
-Route::view('/Admin-login','admin-login');
-Route::get('admin-home', [UserController::class, 'admin_home'])->name('admin-home');
-Route::post('admin-profile', [UserController::class, 'admin_login'])->name('admin-profile');
-Route::get('admin-user-management', [UserController::class, 'admin_user_management'])->name('admin-user-management');
-Route::get('admin-user-blog', [UserController::class, 'admin_user_blog'])->name('admin-user-blog');
-Route::get('admin-user-delete/{id}', [UserController::class, 'admin_user_delete'])->name('admin-user-delete');
-Route::get('admin-user-blog-list/{id}', [UserController::class, 'admin_user_blog_list'])->name('admin-user-blog-list');
-Route::get('admin-user-blog-status/{id}', [UserController::class, 'admin_user_blog_status'])->name('admin-user-blog-status');
-Route::get('admin-user-blog-read/{id}', [UserController::class, 'admin_user_blog_read'])->name('admin-user-blog-read');
-Route::get('admin-users-blog-status/{id}', [UserController::class, 'admin_users_blog_status'])->name('admin-users-blog-status');
 Route::get('apis', function () {
     return view('/');
+});
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('admin-home');
+})->name('dashboard');
+
+
+Route::group(['middleware' => 'disablebackbtn'], function () {
+
+    Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    
+        /*Admin*/
+        // Route::view('/Admin-login','admin-login');
+        Route::get('admin-home', [UserController::class, 'admin_home'])->name('admin-home');
+        Route::post('admin-profile', [UserController::class, 'admin_login'])->name('admin-profile');
+        Route::get('admin-user-management', [UserController::class, 'admin_user_management'])->name('admin-user-management');
+        Route::get('admin-user-blog', [UserController::class, 'admin_user_blog'])->name('admin-user-blog');
+        Route::get('admin-user-delete/{id}', [UserController::class, 'admin_user_delete'])->name('admin-user-delete');
+        Route::get('admin-user-blog-list/{id}', [UserController::class, 'admin_user_blog_list'])->name('admin-user-blog-list');
+        Route::get('admin-user-blog-status/{id}', [UserController::class, 'admin_user_blog_status'])->name('admin-user-blog-status');
+        Route::get('admin-user-blog-read/{id}', [UserController::class, 'admin_user_blog_read'])->name('admin-user-blog-read');
+        Route::get('admin-users-blog-status/{id}', [UserController::class, 'admin_users_blog_status'])->name('admin-users-blog-status');
+        
+    });
 });

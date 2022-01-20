@@ -152,8 +152,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="team-member">
-                                    <a class='btn btn-danger btn-sm' href="{{ 'logout' }}">Logout</a>
-                                    <a class='btn btn-secondary btn-sm' href="">Edit Profile</a>
+                                    <a class='btn btn-danger btn-sm' href="{{ 'user-logout' }}">Logout</a>
+                                    <a class='btn btn-secondary btn-sm' href="{{route('edit-profile',Session::get('user_id'))}}">Edit Profile</a>
                                 </div>
                             </div>
                         </div>

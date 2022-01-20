@@ -12,6 +12,10 @@
 <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <style>
+      a {
+    color: black;
+    text-decoration: none;
+}
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -103,7 +107,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="{{route('admin-home')}}" class="nav-link link-dark" aria-current="page">
+        <a href="{{route('dashboard')}}" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
@@ -140,7 +144,12 @@
         <strong>Safarnama</strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li>
+          <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="ms-3"><span>Logout</span></a>
+        </form>
+        </li>
       </ul>
     </div>
   </div>
