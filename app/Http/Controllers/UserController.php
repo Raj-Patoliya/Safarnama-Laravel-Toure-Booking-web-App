@@ -11,6 +11,7 @@ use App\Models\user_registration;
 use App\Models\UserReg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session; 
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
@@ -25,26 +26,17 @@ class UserController extends Controller
     }
     public function login(Request $request)
     {
-        $data = user_registration::where([
-            ['password', '=', $request->password],
-            ['email', '=', $request->email]
-        ])->first(); 
-        if(isset($data))
-        {
-            $request->session()->put('user_id', $data['user_id']);
-            $request->session()->put('fname', $data['fname']);
-            $request->session()->put('lname', $data['lname']);
-            $request->session()->put('gender', $data['gender']);
-            $request->session()->put('dob', $data['dob']);
-            $request->session()->put('email', $data['email']);
-            $request->session()->put('phone', $data['phone']);
-            $request->session()->put('password', $data['password']);
-            $request->session()->put('images', $data['images']);
-            $request->session()->put('address', $data['address']);
-            $posts =  post::where([
-                    ['user_id', '=', $data['user_id']]
+            if($request->session()->get('user_id') != NULL)
+            { 
+
+                $password = 'JohnDoe';
+                $hashedPassword = Hash::make($password);
+                
+                return $hashedPassword;
+                $posts =  post::where([
+                    ['user_id', '=', $request->session()->get('user_id')]
                     ])->orderBy('post_id', 'desc')->get();
-            $newdata =[];
+                $newdata =[];
                 foreach ($posts as $item)
                 {
                     $data = [];
@@ -54,28 +46,91 @@ class UserController extends Controller
                     $cdata = [];
                     $i =0;
                     foreach( $comments as $itm)
-                    {
+                    {   
+                        $cusername = "";
+                        $cuser = user_registration::where([
+                            ['user_id','=',$itm['user_id']]
+                        ])->get();
+                      
+                        $x=0;
+                        foreach($cuser as $it)
+                        {
+                            $cusername = $it['fname'].' '. $it['lname'];
+                            $x++;
+                        }
+                        $cdata[$i]['cusername'] = $cusername;
                         $cdata[$i]['post_id'] = $itm['post_id'];
                         $cdata[$i]['comment_id'] = $itm['comment_id'];
                         $cdata[$i]['user_id'] = $itm['user_id'];
                         $cdata[$i]['comment'] = $itm['comment'];
                         $i++;
                     }
+                    
                     $data['post_id'] = $item['post_id'];
                     $data['user_id'] = $item['user_id'];
                     $data['title'] = $item['title'];
                     $data['description'] = $item['description'];
                     $data['image'] = $item['attechment'];   
+                    $data['created_at'] = $item['created_at '];   
                     $data['comment'] = $cdata;
                     array_push($newdata,$data);
                 }
-            return view('user-profile',compact('newdata'));           
-        } 
-        else
-        {
-            $request->session()->put('loginmessage','Invalid Login Information');
-            return redirect('/user-login');
-        }           
+                return view('user-profile',compact('newdata'));
+            }
+            else
+            {
+                $data = user_registration::where([
+                    ['password', '=', $request->password],
+                    ['email', '=', $request->email]
+                ])->first(); 
+                if(isset($data))
+                {
+                    $request->session()->put('user_id', $data['user_id']);
+                    $request->session()->put('fname', $data['fname']);
+                    $request->session()->put('lname', $data['lname']);
+                    $request->session()->put('gender', $data['gender']);
+                    $request->session()->put('dob', $data['dob']);
+                    $request->session()->put('email', $data['email']);
+                    $request->session()->put('phone', $data['phone']);
+                    $request->session()->put('images', $data['images']);
+                    $request->session()->put('address', $data['address']);
+                    $posts =  post::where([
+                            ['user_id', '=', $data['user_id']]
+                            ])->orderBy('post_id', 'desc')->get();
+                    $newdata =[];
+                        foreach ($posts as $item)
+                        {
+                            $data = [];
+                            $comments =  comment::where([
+                                ['post_id', '=', $item['post_id']]
+                                ])->orderBy('comment_id', 'desc')->get();
+                            $cdata = [];
+                            $i =0;
+                            foreach( $comments as $itm)
+                            {
+                                $cdata[$i]['post_id'] = $itm['post_id'];
+                                $cdata[$i]['comment_id'] = $itm['comment_id'];
+                                $cdata[$i]['user_id'] = $itm['user_id'];
+                                $cdata[$i]['comment'] = $itm['comment'];
+                                $i++;
+                            }
+                            $data['post_id'] = $item['post_id'];
+                            $data['user_id'] = $item['user_id'];
+                            $data['title'] = $item['title'];
+                            $data['description'] = $item['description'];
+                            $data['image'] = $item['attechment'];   
+                            $data['comment'] = $cdata;
+                            array_push($newdata,$data);
+                        }
+                    return view('user-profile',compact('newdata'));           
+                } 
+                else
+                {
+                    $request->session()->put('loginmessage','Invalid Login Information');
+                    return redirect('/user-login');
+                }
+            }
+                   
     }
     public function logout(Request $request)
     {
@@ -86,8 +141,11 @@ class UserController extends Controller
 
     public function post(Request $req )
     {
+        
         if($file = $req->file('attechment')) 
         {
+         
+            
             $Filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path() . '\img\post', $Filename);
         }
@@ -99,38 +157,13 @@ class UserController extends Controller
         $insert = post::create($data);
         if(isset($insert) == true)
         {
-            $posts =  post::where([
-                ['user_id', '=', $data['user_id']]
-                ])->orderBy('post_id', 'desc')->get();        
-        
-        $newdata =[];
-        foreach ($posts as $item)
-        {
-            $data = [];
-            $comments =  comment::where([
-                ['post_id', '=', $item['post_id']]
-                ])->get();
-            $cdata = [];
-            $i =0;
-            foreach( $comments as $itm)
-            {
-                $cdata[$i]['post_id'] = $itm['post_id'];
-                $cdata[$i]['comment_id'] = $itm['comment_id'];
-                $cdata[$i]['user_id'] = $itm['user_id'];
-                $cdata[$i]['comment'] = $itm['comment'];
-                $i++;
-            }
-            $data['post_id'] = $item['post_id'];
-            $data['user_id'] = $item['user_id'];
-            $data['title'] = $item['title'];
-            $data['description'] = $item['description'];
-            $data['image'] = $item['attechment'];
-            $data['comment'] = $cdata;
-            array_push($newdata,$data);
+            return redirect(route('user.login.success'));
         }
-    return redirect('user-profile',compact('newdata'));
     }
-}
+    public function pos(Type $var = null)
+    {
+        
+    }
 
 
     public function insertRegister(Request $req)
@@ -193,12 +226,9 @@ class UserController extends Controller
         }
         else
         {
-            
             return redirect('/');
         }
-        
     }
-
     public function admin_user_blog_status($id)
     {
             $data =  post::where([
@@ -345,6 +375,23 @@ class UserController extends Controller
         $author = user_registration::all();
         return $author;
         // return response()->json(['author'=>$author],200);
+    }
+    public function delete_post($id)
+    {
+            $delete =  post::where([
+            ['post_id', '=', $id]
+            ])->delete();
+           if(isset($delete))
+           {
+            return redirect(route('user.login.success'));
+           }
+    }
+    public function edit_post($id)
+    {
+           $post = post::where([
+           ['post_id','=',$id],
+           ])->get();
+            return $post;
     }
 
 }
