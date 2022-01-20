@@ -37,12 +37,12 @@
                                 <h4 class="card-title">User Profile</h4>
                             </div>
                             <div class="card-body user-profile-card mb-3">
-                                <img src="{{ url('img/profiles/' . Session::get('images')) }}"
+                                <img src="img/profiles/@php echo $userdata['images']; @endphp"
                                     class="user-profile-image rounded-circle" alt="" />
                                 <h4 class="text-center h6 mt-2"></h4>
-                                @if (Session::has('fname'))
-                                    {{ Session::get('fname') }} {{ Session::get('lname') }}
-                                @endif
+                                    @php
+                                        echo $userdata['fname'].' '. $userdata['lname'];
+                                    @endphp
                             </div>
                             <hr />
                             <div class="card-heading clearfix mt-3">
@@ -54,15 +54,15 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Email:</th>
-                                                <td>{{ Session::get('email') }}</td>
+                                                <td>{{ $userdata->email }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Phone:</th>
-                                                <td>{{ Session::get('phone') }}</td>
+                                                <td>{{ $userdata->phone }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Address:</th>
-                                                <td>{{ Session::get('address') }}</td>
+                                                <td>{{ $userdata->address}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -91,7 +91,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </form> 
                         @foreach ($newdata as $item)
                             <div class="profile-timeline">
                                 <ul class="list-unstyled">
@@ -101,7 +101,7 @@
                                                 <div class="timeline-item-header">
                                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
                                                         alt="" />
-                                                    <span>{{ Session::get('fname') }} {{ Session::get('lname') }}
+                                                    <span>@php echo $userdata['fname'].' '.$userdata['lname'];@endphp
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -111,7 +111,9 @@
                                                         data-id="@php echo $item['post_id'];@endphp"></i>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                         <li class="dropdown-item postid" data-id="@php echo $item['post_id']; @endphp">
-                                                            Edit Post</li>
+                                                            <a class="dropdown-item" href="etid-post/@php echo $item['post_id']; @endphp">Edit Post</a>
+                                                        </li>
+                                                        </li>
                                                         <li><a class="dropdown-item"
                                                                 href="delete-post/@php echo $item['post_id']; @endphp">Detele Post</a>
                                                         </li>
@@ -183,11 +185,6 @@
 <script>
     $(document).ready(function() {
         CKEDITOR.replace('description');
-
-        $(".postid").click(function() {
-            var dataid = $(this).attr("data-id");
-            alert(dataid);
-        });
     });
 </script>
 

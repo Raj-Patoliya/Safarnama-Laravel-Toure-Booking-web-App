@@ -129,7 +129,7 @@
                                     
                                 </li>
                                 <li>
-                                    <a href="{{'/Blog'}}"><span class="fa-font">Blog</span></a>
+                                    <a href="{{route('Blogs-page')}}"><span class="fa-font">Blog</span></a>
                                 </li>
                                 <li>
                                     <a href="{{'/contact-us'}}" class="fa-comment">Contact</a>

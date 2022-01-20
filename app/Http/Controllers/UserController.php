@@ -28,7 +28,9 @@ class UserController extends Controller
     public function login(Request $request)
     {
         if ($request->session()->get('user_id') != NULL) {
-
+            $userdata = user_registration::where([
+                ['user_id', '=',$request->session()->get('user_id')]
+            ])->first();
             $posts =  post::where([
                 ['user_id', '=', $request->session()->get('user_id')]
             ])->orderBy('post_id', 'desc')->get();
@@ -68,24 +70,17 @@ class UserController extends Controller
                 $data['comment'] = $cdata;
                 array_push($newdata, $data);
             }
-            return view('user-profile', compact('newdata'));
+            return view('user-profile', compact('newdata','userdata'));
         } else {
-            $data = user_registration::where([
+            $userdata = user_registration::where([
                 ['password', '=', $request->password],
                 ['email', '=', $request->email]
             ])->first();
-            if (isset($data)) {
-                $request->session()->put('user_id', $data['user_id']);
-                $request->session()->put('fname', $data['fname']);
-                $request->session()->put('lname', $data['lname']);
-                $request->session()->put('gender', $data['gender']);
-                $request->session()->put('dob', $data['dob']);
-                $request->session()->put('email', $data['email']);
-                $request->session()->put('phone', $data['phone']);
-                $request->session()->put('images', $data['images']);
-                $request->session()->put('address', $data['address']);
+            if (isset($userdata)) {
+                $request->session()->put('user_id', $userdata['user_id']);
+                
                 $posts =  post::where([
-                    ['user_id', '=', $data['user_id']]
+                    ['user_id', '=', $userdata['user_id']]
                 ])->orderBy('post_id', 'desc')->get();
                 $newdata = [];
                 foreach ($posts as $item) {
@@ -121,7 +116,7 @@ class UserController extends Controller
                     $data['comment'] = $cdata;
                     array_push($newdata, $data);
                 }
-                return view('user-profile', compact('newdata'));
+                return view('user-profile', compact('newdata','userdata'));
             } else {
                 $request->session()->put('loginmessage', 'Invalid Login Information');
                 return redirect('/user-login');
@@ -192,31 +187,114 @@ class UserController extends Controller
     }
     public function update_profile(Request $req)
     {
-        if ( ($file = $req->file('profile')) != NULL) {
+        if ( ($req->file('profile')) != NULL) {
             $file = $req->file('profile');
             $Filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path() . '\img\profiles', $Filename);
+            
         }
         else
         {
             $Filename=  $req->input('profile');
         }
+        $update1 =  user_registration::where([
+            ['user_id', '=', $req->input('user_id')]
+        ])->update(['images' => $Filename]);
         
-        $update = user_registration::where([
-            ['user_id','=',$req->input('user_id')]
-        ])->update(['fname' => $req->input('fname')],
-        ['lname' => $req->input('lname')],
-        ['email' => $req->input('email')],
-        ['password' => $req->input('password')],
-        ['phone' => $req->input('phone')],
-        ['address' => $req->input('address')],
-        ['images' => $Filename]
-    );
-       
-        if($update == True)
-        {
-            return redirect(route('user.login.success'));
+            if($update1 == 1)
+            {
+                $update = user_registration::where('user_id', $req->input('user_id'))
+                    ->update(['fname'=>$req->input('fname')],
+                    ['lname'=>$req->input('lname')],
+                    ['email'=>$req->input('email')],
+                    ['password'=>$req->input('password')],
+                    ['phone'=>$req->input('phone')],
+                    ['address'=>$req->input('address')]
+                );
+                if($update == 1)  
+                {
+                    return redirect(route('user.login.success'));
+                }
+            }
+    }
+    public function update_post(Request $req)
+    {
+        if ( ($req->file('attechment')) != NULL) {
+            $file = $req->file('attechment');
+            $Filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path() . '\img\post', $Filename);   
         }
+        else
+        {
+            $Filename=  $req->input('attechment');
+        }
+        $post_id = $req->input('post_id');
+        $title = $req->input('title');
+        $description = $req->input('description');
+        $update1 =  post::where([
+            ['post_id', '=', $req->input('post_id')]
+        ])->update(['attechment' => $Filename]);
+            if($update1 == 1)
+            {
+                $update2 =  post::where([
+                    ['post_id', '=', $post_id]
+                ])->update(['title' => $title]);
+                     return $update2;
+                if($update1 == 1)  
+                {
+                    $update3 =  post::where([
+                        ['post_id', '=', $req->input('post_id')]
+                    ])->update(['description' => $req->input('description')]);
+                    if($update3 == 1)  
+                    {
+                        return redirect(route('user.login.success'));
+                    }
+                }
+            }
+    }
+
+    public function blogs_page()
+    {
+        $blogs = post::where([
+            ['status','=','active']
+        ])->paginate(3);
+        return view("Blogs-page",compact('blogs'));
+    }
+    public function read_blogs_page($id)
+    {
+        $blog = post::where([
+            ['post_id','=',$id]
+        ])->get();
+    foreach($blog as $blogs)
+    {
+        $blogid =$blogs['post_id'];
+    }
+        $comments =  comment::where([
+            ['post_id', '=', $blogid]
+        ])->orderBy('comment_id', 'desc')->get();
+        $cdata = [];
+        $i = 0;
+        foreach ($comments as $itm) {
+            $cusername = "";
+            $images="";
+            $cuser = user_registration::where([
+                ['user_id', '=', $itm['user_id']]
+            ])->get();
+            $x = 0;
+            foreach ($cuser as $it) {
+                $cusername = $it['fname'] . ' ' . $it['lname'];
+                $images = $it['images'];
+                
+            }
+            $cdata[$i]['images'] = $images;
+            $cdata[$i]['cusername'] = $cusername;
+            $cdata[$i]['post_id'] = $itm['post_id'];
+            $cdata[$i]['comment_id'] = $itm['comment_id'];
+            $cdata[$i]['user_id'] = $itm['user_id'];
+            $cdata[$i]['comment'] = $itm['comment'];
+            $i++;
+        }
+        return view('single-blog',compact('blog','cdata'));
     }
 
     /* Admin Controls */
@@ -350,11 +428,18 @@ class UserController extends Controller
             return redirect(route('user.login.success'));
         }
     }
-    public function edit_post($id)
+    public function edit_post(Request $request,$id)
     {
+        // return view('user-edit-post');
         $post = post::where([
             ['post_id', '=', $id],
         ])->get();
-        return $post;
+        $userdata = user_registration::where([
+            ['user_id', '=', $request->session()->get('user_id')],
+        ])->get();
+        return view('user-edit-post',compact('userdata','post'));
     }
 }
+
+
+

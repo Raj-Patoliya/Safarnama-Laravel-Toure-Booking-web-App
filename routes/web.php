@@ -22,7 +22,7 @@ Route::view('/user-login','user-login');
 Route::view('/user-login', 'user-login');
 Route::view('/contact-us','contact-us');
 Route::view('/about-us', 'about-us');
-Route::view('/user-edit-post', 'user-edit-post');
+// Route::view('/user-edit-post', 'user-edit-post');
 
 
 Route::resource('/','App\Http\Controllers\UserController');
@@ -32,10 +32,13 @@ Route::post('store-form', [UserController::class, 'store']);
 Route::match(['get', 'post'],'profile', [UserController::class, 'login'])->name('user.login.success');
 Route::post('create_post', [UserController::class, 'post'])->name('create.post');
 Route::get('delete-post/{id}', [UserController::class, 'delete_post'])->name('delete-post');
-Route::get('eid-post/{id}', [UserController::class, 'edit_post'])->name('edit-post');
+Route::get('etid-post/{id}', [UserController::class, 'edit_post'])->name('edit-post');
+Route::match(['get', 'post'],'update-post', [UserController::class, 'update_post'])->name('update-post');
 Route::get('user-logout', [UserController::class, 'logout'])->name('user-logout');
 Route::get('edit-profile/{id}', [UserController::class, 'edit_profile'])->name('edit-profile');
-Route::post('update-profile', [UserController::class, 'update_profile'])->name('update-profile');
+Route::match(['get', 'post'],'update-profile', [UserController::class, 'update_profile'])->name('update-profile');
+Route::match(['get', 'post'],'Blogs-page', [UserController::class, 'blogs_page'])->name('Blogs-page');
+Route::match(['get', 'post'],'read-blogs-page/{id}', [UserController::class, 'read_blogs_page'])->name('read-blogs-page');
 
 
 Route::get('apis', function () {
