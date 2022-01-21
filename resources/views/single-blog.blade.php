@@ -16,7 +16,16 @@
         <!-- Favicon -->
         <link href="favicon.ico" rel="shortcut icon">
         <!-- Bootstrap Core CSS -->
-     
+        <link rel="stylesheet" href="{{url('css/bootstrap.css')}}" rel="stylesheet">
+
+        <link rel="stylesheet" href="{{ url('css/animate.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url('css/font-awesome.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url('css/nexus.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url('css/responsive.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url('css/custom.css')}}" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=PT+Sans" type="text/css" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{{url('css/bootstrap.css')}}" rel="stylesheet">
    
         <link rel="stylesheet" href="{{ url('css/animate.css') }}" rel="stylesheet">
@@ -235,13 +244,15 @@
                                     <!-- Author Name -->
                                     <div class="blog-post-details-item blog-post-details-item-left user-icon">
                                         <i class="fa fa-user color-gray-light"></i>
-                                        <a href="#">Admin</a>
+                                        @foreach ($user as $user)
+                                        {{$user->fname}} {{$user->lname}}
+                                        @endforeach  
                                     </div>
                                     <!-- End Author Name -->
                                     <!-- Date -->
                                     <div class="blog-post-details-item blog-post-details-item-left">
                                         <i class="fa fa-calendar color-gray-light"></i>
-                                        <a href="#">@php echo $item['created_at']; @endphp</a>
+                                        @php echo $item['created_at']; @endphp
                                     </div>
                                     <!-- End Date -->
                                     <!-- Tags -->
@@ -281,7 +292,8 @@
                                                             </a>
                                                         </div>
                                                         <div class="col-md-10">
-                                                            <h4>@php
+                                                            <h4>
+                                                                @php
                                                                 echo $item['cusername'];
                                                             @endphp</h4>
                                                             <p>@php
@@ -291,6 +303,7 @@
                                                     </div>
                                                 </li>
                                                 @endforeach
+                                                @if(Session::has('user_id'))
                                                 <!-- Comment Form -->
                                                 <li class="list-group-item">
                                                     <div class="blog-comment-form">
@@ -303,35 +316,39 @@
                                                         </div>
                                                         <div class="row margin-top-20">
                                                             <div class="col-md-12">
-                                                                <form>
-                                                                    <label>Name</label>
-                                                                    <div class="row margin-bottom-20">
-                                                                        <div class="col-md-7 col-md-offset-0">
-                                                                            <input class="form-control" type="text">
-                                                                        </div>
-                                                                    </div>
-                                                                    <label>Email
-                                                                        <span>*</span>
-                                                                    </label>
-                                                                    <div class="row margin-bottom-20">
-                                                                        <div class="col-md-7 col-md-offset-0">
-                                                                            <input class="form-control" type="text">
-                                                                        </div>
-                                                                    </div>
+                                                                <form action="{{route('post-comment')}}">
                                                                     <label>Message</label>
                                                                     <div class="row margin-bottom-20">
                                                                         <div class="col-md-11 col-md-offset-0">
-                                                                            <textarea class="form-control" rows="8"></textarea>
+                                                                            <textarea class="form-control" rows="8" name="comment"></textarea>
+                                                                            @foreach($blog as $blog)
+                                                                                <input type="hidden" name="post_id" value = "{{$blog->post_id}}">
+                                                                            @endforeach
+                                                                            <input type="hidden" name="user_id" value="{{Session::get('user_id')}}">
                                                                         </div>
                                                                     </div>
                                                                     <p>
-                                                                        <button class="btn btn-primary" type="submit">Send Message</button>
+                                                                        <button class="btn btn-primary" type="submit">Comment</button>
                                                                     </p>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </li>
+                                                @else
+                                                <li class="list-group-item">
+                                                    <div class="blog-comment-form">
+                                                        <div class="row margin-top-20">
+                                                            <div class="col-md-12">
+                                                                <div class="pull-left">
+                                                                    <h3>To Leave a Comment Please Login</h3>
+                                                                    <h6>Click <a href="{{url('user-login')}}">HERE </a>to login to your account.</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                </li>
+                                                @endif
                                                 <!-- End Comment Form -->
                                             </ul>
                                         </div>
@@ -353,106 +370,91 @@
             <div id="base">
                 <div class="container padding-vert-30 margin-top-60">
                     <div class="row">
-                        <!-- Contact Details -->
                         <div class="col-md-4 margin-bottom-20">
                             <h3 class="margin-bottom-10">Contact Details</h3>
                             <p>
-                                <span class="fa-phone">Telephone:</span>(212)888-77-88
+                                <span class="fa-phone">Telephone:</span>(+91)88888 88888
                                 <br>
                                 <span class="fa-envelope">Email:</span>
-                                <a href="mailto:info@joomla51.com">info@joomla51.com</a>
+                                <a href="#">safarnama@aol.com</a>
                                 <br>
                                 <span class="fa-link">Website:</span>
-                                <a href="http://www.joomla51.com">www.joomla51.com</a>
+                                <a href="#">www.safarnama.com</a>
                             </p>
-                            <p>The Dunes, Top Road,
-                                <br>Strandhill,
-                                <br>Co. Sligo,
-                                <br>Ireland</p>
+                            <p>E Block, Central Secretariat,
+                                <br>New Delhi,
+                                <br>Delhi 110011,
+                                <br>India</p>
                         </div>
-                        <!-- End Contact Details -->
-                        <!-- Sample Menu -->
+
                         <div class="col-md-3 margin-bottom-20">
-                            <h3 class="margin-bottom-10">Sample Menu</h3>
+                            <h3 class="margin-bottom-10">About</h3>
                             <ul class="menu">
                                 <li>
-                                    <a class="fa-tasks" href="#">Placerat facer possim</a>
+                                    <a class="fa-tasks" href="#">About us</a>
                                 </li>
                                 <li>
-                                    <a class="fa-users" href="#">Quam nunc putamus</a>
+                                    <a class="fa-users" href="#">Blog</a>
                                 </li>
                                 <li>
-                                    <a class="fa-signal" href="#">Velit esse molestie</a>
+                                    <a class="fa-signal" href="#">Holiday Package</a>
                                 </li>
                                 <li>
-                                    <a class="fa-coffee" href="#">Nam liber tempor</a>
+                                    <a class="fa-coffee" href="#">One Day Trip</a>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-                        <!-- End Sample Menu -->
+
                         <div class="col-md-1"></div>
-                        <!-- Disclaimer -->
+
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
-                            <h3 class="color-gray margin-bottom-10">Join our Newsletter</h3>
+                            <h3 class="color-gray margin-bottom-10"></h3>
                             <p>
-                                Sign up for our newsletter for all the
-                                <br>latest news and information
-                            </p>
-                            <input type="email">
-                            <br>
-                            <button class="btn btn-primary btn-lg margin-top-20" type="button">Subscribe</button>
+                                Term & Conditions
+                                <br>MEDICAL CERTIFICATE & NOC
+
+                            <a href="{{url('assets/Medical-Certificate-SafarNama.pdf')}}" download="Medical-Certificate-SafarNama.pdf"><button class="btn btn-primary btn-lg margin-top-20" id="medical"  type="button">Dowmload</button></a>
+                        </p>
+                          <br>
                         </div>
-                        <!-- End Disclaimer -->
+
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-            <!-- Footer Menu -->
+
             <div id="footer">
                 <div class="container">
                     <div class="row">
-                        <div id="footermenu" class="col-md-8">
-                            <ul class="list-unstyled list-inline">
-                                <li>
-                                    <a href="#" target="_blank">Sample Link</a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">Sample Link</a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">Sample Link</a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">Sample Link</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="copyright" class="col-md-4">
+                        <div id="copyright" class="col-md-12">
                             <p class="pull-right">(c) 2014 Your Copyright Info</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- End Footer Menu -->
-            <!-- JS -->
+
             <script type="text/javascript" src="{{url('js/jquery.min.js')}}" type="text/javascript"></script>
             <script type="text/javascript" src="{{url('js/bootstrap.min.js')}}" type="text/javascript"></script>
             <script type="text/javascript" src="{{url('js/scripts.js')}}"></script>
-     
+
             <script type="text/javascript" src="{{url('js/jquery.isotope.js')}}" type="text/javascript"></script>
-       
+
             <script type="text/javascript" src="{{url('js/jquery.slicknav.js')}}" type="text/javascript"></script>
-  
+
             <script type="text/javascript" src="{{url('js/jquery.visible.js')}}" charset="utf-8"></script>
- 
+
             <script type="text/javascript" src="{{url('js/jquery.sticky.js')}}" charset="utf-8"></script>
 
             <script type="text/javascript" src="{{url('js/slimbox2.js')}}" charset="utf-8"></script>
-       
+
             <script src="{{url('js/modernizr.custom.js')}}" type="text/javascript"></script>
 
-            <!-- End JS -->
     </body>
+    <script>
+        $( document ).ready(function() {
+   $("#medical").click(function (){
+   });
+});
+    </script>
 </html>
-<!-- === END FOOTER === -->

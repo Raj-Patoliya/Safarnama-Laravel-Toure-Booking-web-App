@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\comment;
 use App\Models\Continent;
 use App\Models\Country;
+use App\Models\Package;
 use App\Models\post;
 use App\Models\User;
 use App\Models\user_registration;
@@ -20,10 +21,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
         $continent = Continent::all();
-        return view('home', compact('continent'));
+        $userid = $req->session()->get('user_id');
+        $username = user_registration::where('user_id','=',$userid)->get('fname');
+        return view('home', compact('continent','username'));
     }
     public function login(Request $request)
     {
@@ -70,6 +73,7 @@ class UserController extends Controller
                 $data['comment'] = $cdata;
                 array_push($newdata, $data);
             }
+
             return view('user-profile', compact('newdata','userdata'));
         } else {
             $userdata = user_registration::where([
@@ -238,24 +242,16 @@ class UserController extends Controller
             {
                 $update2 =  post::where([
                     ['post_id', '=', $post_id]
-                ])->update(['title' => $title]);
-                     return $update2;
-                if($update1 == 1)  
-                {
-                    $update3 =  post::where([
-                        ['post_id', '=', $req->input('post_id')]
-                    ])->update(['description' => $req->input('description')]);
-                    if($update3 == 1)  
-                    {
-                        return redirect(route('user.login.success'));
-                    }
-                }
+                ])->update(['title' => $title,
+                'description' => $description
+            ]);
             }
+            return redirect(route('user.login.success'));
     }
 
     public function blogs_page()
     {
-        $blogs = post::where([
+         $blogs = post::where([
             ['status','=','active']
         ])->paginate(3);
         return view("Blogs-page",compact('blogs'));
@@ -268,7 +264,11 @@ class UserController extends Controller
     foreach($blog as $blogs)
     {
         $blogid =$blogs['post_id'];
+        $userid =$blogs['user_id'];
     }
+    $user = user_registration::where([
+        ['user_id','=',$userid]
+    ])->get();
         $comments =  comment::where([
             ['post_id', '=', $blogid]
         ])->orderBy('comment_id', 'desc')->get();
@@ -294,7 +294,20 @@ class UserController extends Controller
             $cdata[$i]['comment'] = $itm['comment'];
             $i++;
         }
-        return view('single-blog',compact('blog','cdata'));
+        return view('single-blog',compact('blog','cdata','user'));
+    }
+
+    public function post_comment(Request $req)
+    {
+        $data['post_id']  = $req->input('post_id');
+        $data['user_id'] = $req->input('user_id');
+        $data['comment'] = $req->input('comment');
+        $insert = comment::create($data); 
+        if($insert == TRUE)
+        {
+            return redirect(route('read-blogs-page',$data['post_id']));
+        }
+        
     }
 
     /* Admin Controls */
@@ -439,7 +452,29 @@ class UserController extends Controller
         ])->get();
         return view('user-edit-post',compact('userdata','post'));
     }
+    public function store_package(Request $req)
+    {
+
+        $data['pack_title'] = $req->input('pack_title');
+        $data['origin'] = $req->input('origin');
+        $data['destination'] = $req->input('destination');
+        $data['days'] = $req->input('days');
+        $data['nights'] = $req->input('nights');
+        $data['price'] = $req->input('price');
+        $data['policy'] = $req->input('policy');
+        $data['activity'] = $req->input('activity');
+        $data['dayplanning'] = $req->input('dayplaning');
+        $data['poster_image'] = $req->input('poster_image');
+        $data['start_date'] = $req->input('start_date');
+        $data['end_date'] = $req->input('end_date');
+        $data['status'] = 'active   ';
+        if ($file = $req->file('poster_image')) {
+            $Filename = time() . '.' . $file->getClientOriginalExtension();
+            // $file->move(public_path() . '\img\package', $Filename);
+        }
+        $data['poster_image'] = $Filename;
+        // $insert = Package::create($data);
+        // $id = $insert->id;
+        return $data;
+    }
 }
-
-
-

@@ -17,11 +17,12 @@ use Facade\FlareClient\View;
 /*User's View*/
 Route::view('/', 'home');
 Route::view('/Blog','single-blog');
-// Route::view('/register','user-register');
+Route::view('/register','user-register');
 Route::view('/user-login','user-login');
-Route::view('/user-login', 'user-login');
+Route::view('/user-login','user-login');
 Route::view('/contact-us','contact-us');
 Route::view('/about-us', 'about-us');
+Route::view('/admin-add-package ','admin-add-package');
 // Route::view('/user-edit-post', 'user-edit-post');
 
 
@@ -39,6 +40,9 @@ Route::get('edit-profile/{id}', [UserController::class, 'edit_profile'])->name('
 Route::match(['get', 'post'],'update-profile', [UserController::class, 'update_profile'])->name('update-profile');
 Route::match(['get', 'post'],'Blogs-page', [UserController::class, 'blogs_page'])->name('Blogs-page');
 Route::match(['get', 'post'],'read-blogs-page/{id}', [UserController::class, 'read_blogs_page'])->name('read-blogs-page');
+Route::match(['get', 'post'],'post-comment', [UserController::class, 'post_comment'])->name('post-comment');
+Route::match(['get', 'post'],'store-package', [UserController::class, 'store_package'])->name('store-package');
+
 
 
 Route::get('apis', function () {

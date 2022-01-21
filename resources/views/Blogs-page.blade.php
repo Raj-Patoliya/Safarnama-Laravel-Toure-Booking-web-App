@@ -154,7 +154,7 @@
                 <div class="container background-white">
                     <div class="row margin-vert-30">
                         <!-- Main Column -->
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <!-- Blog Post -->
                             @foreach ($blogs as $blog)
                                 
@@ -185,12 +185,7 @@
                                     </div>
                                     <!-- End Date -->
                                     <!-- Tags -->
-                                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags">
-                                        <i class="fa fa-tag color-gray-light"></i>
-                                        <a href="#">PHP</a>,
-                                        <a href="#">HTML</a>,
-                                        <a href="#">Ruby</a>
-                                    </div>
+                                
                                     <!-- End Tags -->
                                     <!-- # of Comments -->
                                     <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last">
@@ -227,10 +222,9 @@
                             @endforeach
                             <!-- End Blog Item -->
                             <!-- Pagination -->
-                            <ul class="pagination">
-                                <li class="">
-                                    {{$blogs->links()}}
-                                </li>
+                        <div class="text-right">        
+                            {{$blogs->links()}}
+                        </div>
                             
                             </ul>
                             <!-- End Pagination -->

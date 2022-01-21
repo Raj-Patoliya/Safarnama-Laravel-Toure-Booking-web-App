@@ -14,5 +14,7 @@ class comment extends Model
         'post_id',
         'user_id',
         'comment',
+        'updated_at', 
+        'created_at'
     ];
 }

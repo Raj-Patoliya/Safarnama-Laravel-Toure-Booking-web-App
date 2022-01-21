@@ -39,9 +39,19 @@
                     <a href="#" target="_blank" title="GooglePlus"></a>
                 </li>
             </ul>
+            @if(Session::has('user_id'))
+            <div id="pre-header" class="container" style="height:340px">
+                <a href="{{route('user.login.success')}}"><button class="btn btn-primary btn-lg margin-top-20" style="position: fixed;margin-left: 70%;z-index: 99;background: transparent;border: none;" >@php
+                    foreach ($username as $key) {
+                        echo $key['fname'];
+                    }
+                @endphp</button></a>
+            </div>
+            @else
             <div id="pre-header" class="container" style="height:340px">
                 <a href="{{url('/user-login')}}"><button class="btn btn-primary btn-lg margin-top-20" style="position: fixed;margin-left: 70%;z-index: 99;background: transparent;border: none;" >Login?</button></a>
             </div>
+            @endif
             <div id="header">
                 <div class="container">
                     <div class="row">
