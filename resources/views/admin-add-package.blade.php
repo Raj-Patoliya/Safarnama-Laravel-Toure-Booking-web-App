@@ -157,15 +157,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="{{route('admin-add-package')}}" class="nav-link link-dark active">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#grid" />
                         </svg>
-                        Packages
+                        Add Packages
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin-user-management') }}" class="nav-link link-dark active">
+                    <a href="{{ route('admin-user-management') }}" class="nav-link link-dark ">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#people-circle" />
                         </svg>
@@ -280,6 +280,9 @@
                                                 placeholder="dd/mm/yyyy" required>
                                         </div>
                                     </div>
+                                    <form class="row g-3" action="{{route('store-package')}}" method="post" enctype="multipart/form-data">
+                                        @csrf    
+                                    
                                     <div class="row gy-3" id="dynamicAddRemove">
                                         <label class="form-label mb-0">Multiple Images</label>              
                                         <div class="col-md-10">                  
@@ -292,13 +295,13 @@
                                     <div class="col-12">
                                         <input type ='submit' value='Submit' name='submit' class="btn btn-primary px-4">  
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </form>
     </main>
     <script src="{{ url('js/sidebars.js') }}"></script>
     <script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
@@ -323,7 +326,7 @@
 
         $("#dynamicAddRemove").append(
 
-            '<tr class="row gy-3"><td class="col-md-10"><input type="file" name="image[]" placeholder="Service Name" class="form-control" /></td><td class="col-md-2 text-end d-grid"><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>'
+            '<tr class="row gy-3"><td class="col-md-10"> <input type="file" name="image[]" class="form-control"></td><td class="col-md-2 text-end d-grid"><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>'
 
         );
 

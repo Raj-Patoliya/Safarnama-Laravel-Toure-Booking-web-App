@@ -125,11 +125,13 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Packages
+        <a href="{{route('admin-add-package')}}" class="nav-link link-dark">
+            <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#grid" />
+            </svg>
+            Add Packages
         </a>
-      </li>
+    </li>
       <li>
         <a href="{{route('admin-user-management')}}" class="nav-link link-dark active">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>

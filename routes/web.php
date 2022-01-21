@@ -22,7 +22,7 @@ Route::view('/user-login','user-login');
 Route::view('/user-login','user-login');
 Route::view('/contact-us','contact-us');
 Route::view('/about-us', 'about-us');
-Route::view('/admin-add-package ','admin-add-package');
+Route::view('/admin-add-package','admin-add-package')->name('admin-add-package');
 // Route::view('/user-edit-post', 'user-edit-post');
 
 
