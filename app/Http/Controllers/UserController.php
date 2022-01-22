@@ -204,20 +204,16 @@ class UserController extends Controller
         $update1 =  user_registration::where([
             ['user_id', '=', $req->input('user_id')]
         ])->update(['images' => $Filename]);
-
+        
         if ($update1 == 1) {
-            $update = user_registration::where('user_id', $req->input('user_id'))
-                ->update(
-                    ['fname' => $req->input('fname')],
-                    ['lname' => $req->input('lname')],
-                    ['email' => $req->input('email')],
-                    ['password' => $req->input('password')],
-                    ['phone' => $req->input('phone')],
-                    ['address' => $req->input('address')]
-                );
-            if ($update == 1) {
+            $data['fname'] = $req->input('fname');
+            $data['lname'] = $req->input('lname');
+            $data['email'] = $req->input('email');
+            $data['phone'] = $req->input('phone');
+            $data['password'] = $req->input('password');
+            $data['address'] = $req->input('address');
+            $update = user_registration::where('user_id','=',$req->input('user_id'))->update($data);
                 return redirect(route('user.login.success'));
-            }
         }
     }
     public function update_post(Request $req)
@@ -356,6 +352,34 @@ class UserController extends Controller
             ])->update(['status' => 'active']);
             if ($update == true) {
                 return redirect()->route('admin-user-blog-list', [$userid]);
+            }
+        }
+    }
+    public function admin_users_blog_status($id)
+    {
+        $data =  post::where([
+            ['post_id', '=', $id]
+        ])->get();
+        $userid = '';
+        $status = '';
+        foreach ($data as $data) {
+            $userid = $data['user_id'];
+            $status = $data['status'];
+        }
+        if ($status == 'active') {
+            $update =  post::where([
+                ['post_id', '=', $id]
+            ])->update(['status' => 'pending']);
+            if ($update == true) {
+
+                return redirect()->route('admin-user-blog');
+            }
+        } else {
+            $update =  post::where([
+                ['post_id', '=', $id]
+            ])->update(['status' => 'active']);
+            if ($update == true) {
+                return redirect()->route('admin-user-blog');
             }
         }
     }
@@ -505,15 +529,50 @@ class UserController extends Controller
     public function admin_package_view($id)
     {
         $data = Package::where('pack_id','=',$id)->first();
-        return view('');
     }
     public function admin_package_edit($id)
     {
         $data = Package::where('pack_id',$id)->first();
+        $image_data = Multi_images::where('pack_id',$id)->get();
+        return view('admin-edit-package',compact('data','image_data'));
+        // return $data;
 
     }
     public function admin_package_delete($id)
     {
-        $data = Package::where('pack_id',$id)->first();
+        $update = Package::where('pack_id','=',$id)->delete();
+        return redirect()->route('admin-package-list');
+    }
+    public function update_package(Request $req)
+    {
+        $data['pack_id'] = $req->input('pack_id');
+        $data['pack_type'] = $req->input('pack_type');
+        $data['pack_title'] = $req->input('pack_title');
+        $data['origin'] = $req->input('origin');
+        $data['destination'] = $req->input('destination');
+        $data['days'] = $req->input('days');
+        $data['nights'] = $req->input('nights');
+        $data['price'] = $req->input('price');
+        $data['policy'] = $req->input('policy');
+        $data['activity'] = $req->input('activity');
+        $data['dayplanning'] = $req->input('dayplaning');
+        $data['poster_image'] = $req->input('poster_image');
+        $data['start_date'] = $req->input('start_date');
+        $data['end_date'] = $req->input('end_date');
+        $data['status'] = $req->input('status');
+        if ($req->hasfile('poster_image')) 
+        {
+            if ($file = $req->file('poster_image')) {
+                $Filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path() . '\img\package', $Filename);
+            }
+            $data['poster_image'] = $Filename;
+        }
+        else
+        {
+            $data['poster_image'] = $req->input('poster_image');
+        }
+        $update = Package::where('pack_id','=',$req->input('pack_id'))->update($data);
+        return redirect()->route('admin-package-list');        
     }
 }

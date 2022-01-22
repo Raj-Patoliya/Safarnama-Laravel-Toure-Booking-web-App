@@ -41,6 +41,7 @@ Route::match(['get', 'post'],'Blogs-page', [UserController::class, 'blogs_page']
 Route::match(['get', 'post'],'read-blogs-page/{id}', [UserController::class, 'read_blogs_page'])->name('read-blogs-page');
 Route::match(['get', 'post'],'post-comment', [UserController::class, 'post_comment'])->name('post-comment');
 Route::match(['get', 'post'],'store-package', [UserController::class, 'store_package'])->name('store-package');
+Route::match(['get', 'post'],'update-package', [UserController::class, 'update_package'])->name('update-package');
 Route::get('single-package/{id}', [UserController::class, 'single_package'])->name('single-package');
 
 
