@@ -119,9 +119,9 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="{{route('admin-package-list')}}" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Admin Blogs
+          Package List
         </a>
       </li>
       <li>

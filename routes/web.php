@@ -23,7 +23,6 @@ Route::view('/user-login','user-login');
 Route::view('/contact-us','contact-us');
 Route::view('/about-us', 'about-us');
 Route::view('/admin-add-package','admin-add-package')->name('admin-add-package');
-// Route::view('/user-edit-post', 'user-edit-post');
 
 
 Route::resource('/','App\Http\Controllers\UserController');
@@ -42,7 +41,7 @@ Route::match(['get', 'post'],'Blogs-page', [UserController::class, 'blogs_page']
 Route::match(['get', 'post'],'read-blogs-page/{id}', [UserController::class, 'read_blogs_page'])->name('read-blogs-page');
 Route::match(['get', 'post'],'post-comment', [UserController::class, 'post_comment'])->name('post-comment');
 Route::match(['get', 'post'],'store-package', [UserController::class, 'store_package'])->name('store-package');
-
+Route::get('single-package/{id}', [UserController::class, 'single_package'])->name('single-package');
 
 
 Route::get('apis', function () {
@@ -68,6 +67,10 @@ Route::group(['middleware' => 'disablebackbtn'], function () {
         Route::get('admin-user-blog-status/{id}', [UserController::class, 'admin_user_blog_status'])->name('admin-user-blog-status');
         Route::get('admin-user-blog-read/{id}', [UserController::class, 'admin_user_blog_read'])->name('admin-user-blog-read');
         Route::get('admin-users-blog-status/{id}', [UserController::class, 'admin_users_blog_status'])->name('admin-users-blog-status');
-        
+        Route::match(['get', 'post'],'admin-package-list', [UserController::class, 'admin_package_list'])->name('admin-package-list');
+        Route::get('admin-package-status/{id}', [UserController::class, 'admin_package_status'])->name('admin-package-status');
+        Route::get('admin-package-delete/{id}', [UserController::class, 'admin_package_delete'])->name('admin-package-delete');
+        Route::get('admin-package-edit/{id}', [UserController::class, 'admin_package_edit'])->name('admin-package-edit');
+        Route::get('admin-package-view/{id}', [UserController::class, 'admin_package_view'])->name('admin-package-view');
     });
 });

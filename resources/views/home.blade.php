@@ -195,71 +195,26 @@
                     </div>
                 </div>
                 <div class="container background-gray-lighter">
-                    <div class="row margin-vert-40">
-                        <div class="col-md-4">
-                            <div class="col-md-4">
-                                <i class="fa-clock-o fa-5x color-primary"></i>
-                            </div>
-                            <div class="col-md-8">
-                                <h2 class="margin-top-5 margin-bottom-0">3,474.5</h2>
-                                <p>WORKING HOURS</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="col-md-4">
-                                <i class="fa-tachometer fa-5x color-primary"></i>
-                            </div>
-                            <div class="col-md-8">
-                                <h2 class="margin-top-5 margin-bottom-0">3,474.5</h2>
-                                <p>WORKING HOURS</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="col-md-4">
-                                <i class="fa-users fa-5x color-primary"></i>
-                            </div>
-                            <div class="col-md-8">
-                                <h2 class="margin-top-5 margin-bottom-0">3,474.5</h2>
-                                <p>WORKING HOURS</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container background-white">
-                    <div class="row margin-vert-30">
-
-                        <div class="col-md-12">
-                            <h2 class="text-center">Welcome to LifeStyle</h2>
-                            <p class="text-center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                lobortis nisl ut aliquip ex ea commodo consequat.</p>
-                            <p class="text-center">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit
-                                augue duis dolore te feugait nulla facilisi. Cras non sem sem, at eleifend mi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Curabitur eget nisl
-                                a risus.</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="container background-gray-lighter">
                     <div class="row padding-vert-20">
                         <div class="col-md-1">
                         </div>
                         <div class="col-md-10">
 
                             <ul class="portfolio-group">
-
+                            @foreach ($package as $item)
                                 <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                                    <a href="#">
+                                    <a href="{{route('single-package',$item->pack_id)}}">
                                         <figure class="animate fadeInLeft">
-                                            <img alt="image1" src="{{url('img/frontpage/image1.jpg')}}">
+                                            <img alt="image1" src="http://localhost:8000/img/package/@php echo $item['poster_image'];@endphp">
                                             <figcaption>
-                                                <h3>Placerat facer possim</h3>
-                                                <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
+                                                <h3>{{$item->pack_title}}</h3>
+                                                <h4>Rs.{{$item->price}}/- Per Person</h4>
                                             </figcaption>
                                         </figure>
                                     </a>
                                 </li>
-
-                                <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
+                                @endforeach
+                                {{-- <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
                                     <a href="#">
                                         <figure class="animate fadeInRight">
                                             <img alt="image2" src="{{url('img/frontpage/image2.jpg')}}">
@@ -317,7 +272,7 @@
                                             </figcaption>
                                         </figure>
                                     </a>
-                                </li>
+                                </li> --}}
 
                             </ul>
 

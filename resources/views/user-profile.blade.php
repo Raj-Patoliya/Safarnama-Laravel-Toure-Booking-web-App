@@ -110,7 +110,7 @@
                                                         data-bs-toggle="dropdown" aria-expanded="false"
                                                         data-id="@php echo $item['post_id'];@endphp"></i>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                        <li class="dropdown-item postid" data-id="@php echo $item['post_id']; @endphp">
+                                                        <li  data-id="@php echo $item['post_id']; @endphp">
                                                             <a class="dropdown-item" href="etid-post/@php echo $item['post_id']; @endphp">Edit Post</a>
                                                         </li>
                                                         </li>

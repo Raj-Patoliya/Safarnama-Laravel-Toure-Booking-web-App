@@ -28,7 +28,8 @@ class UserController extends Controller
         $continent = Continent::all();
         $userid = $req->session()->get('user_id');
         $username = user_registration::where('user_id', '=', $userid)->get('fname');
-        return view('home', compact('continent', 'username'));
+        $package = Package::where('status','=','Active')->paginate(6);
+        return view('home', compact('continent', 'username','package'));
     }
     public function login(Request $request)
     {
@@ -302,6 +303,19 @@ class UserController extends Controller
         }
     }
 
+    public function single_package($id,Request $req)
+    {
+        $data =  Package::where([
+            ['pack_id', '=', $id]
+        ])->get();
+        $userid = $req->session()->get('user_id');
+        $username = user_registration::where('user_id', '=', $userid)->get('fname'); 
+        $multi_image = Multi_images::where('pack_id','=',$id)->get();
+        return view('Package', compact('username','data','multi_image'));
+
+    }
+
+
     /* Admin Controls */
 
     public function admin_user_management(Request $req)
@@ -345,31 +359,29 @@ class UserController extends Controller
             }
         }
     }
-    public function admin_users_blog_status($id)
+    public function admin_package_status($id)
     {
-        $data =  post::where([
-            ['post_id', '=', $id]
-        ])->get();
-        $userid = '';
+        $data =  Package::where([
+            ['pack_id', '=', $id]
+        ])->get('status');
         $status = '';
         foreach ($data as $data) {
-            $userid = $data['user_id'];
             $status = $data['status'];
         }
-        if ($status == 'active') {
-            $update =  post::where([
-                ['post_id', '=', $id]
-            ])->update(['status' => 'deactive']);
+        if ($status == 'Active') {
+            $update =  Package::where([
+                ['pack_id', '=', $id]
+            ])->update(['status' => 'Deactive']);
             if ($update == true) {
 
-                return redirect()->route('admin-user-blog');
+                return redirect()->route('admin-package-list');
             }
         } else {
-            $update =  post::where([
-                ['post_id', '=', $id]
-            ])->update(['status' => 'active']);
+            $update =  Package::where([
+                ['pack_id', '=', $id]
+            ])->update(['status' => 'Active']);
             if ($update == true) {
-                return redirect()->route('admin-user-blog');
+                return redirect()->route('admin-package-list');
             }
         }
     }
@@ -446,6 +458,7 @@ class UserController extends Controller
     }
     public function store_package(Request $req)
     {
+        $data['pack_type'] = $req->input('pack_type');
         $data['pack_title'] = $req->input('pack_title');
         $data['origin'] = $req->input('origin');
         $data['destination'] = $req->input('destination');
@@ -458,7 +471,7 @@ class UserController extends Controller
         $data['poster_image'] = $req->input('poster_image');
         $data['start_date'] = $req->input('start_date');
         $data['end_date'] = $req->input('end_date');
-        $data['status'] = 'active';
+        $data['status'] = 'Active';
         if ($file = $req->file('poster_image')) {
             $Filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path() . '\img\package', $Filename);
@@ -469,21 +482,38 @@ class UserController extends Controller
         $files = [];
         if ($req->hasfile('image')) 
         {
-            $i = 0;
             foreach ($req->file('image') as $file) {
                 $name = time() . rand(1, 100) . '.' . $file->extension();
                 $file->move(public_path() . '\img\package', $name);  
-                $files[$i] = $name;
-                $i++;
+                $files[] = $name;
+                
             }
-            $x = 0;
             foreach($files as $item)
             {
-                $datas = array('pack_id'=>$id,"image"=>$item[$x]);
+                $datas = array('pack_id'=>$id,"image"=>$item);
                 $ins = Multi_images::create($datas);
-                $x++;
             }
         }
-        return $id = $ins->id;
+        return redirect()->route('admin-package-list');
+    }
+
+    public function admin_package_list()
+    {
+        $package = Package::all();
+        return view('admin-package-list',compact('package'));
+    }
+    public function admin_package_view($id)
+    {
+        $data = Package::where('pack_id','=',$id)->first();
+        return view('');
+    }
+    public function admin_package_edit($id)
+    {
+        $data = Package::where('pack_id',$id)->first();
+
+    }
+    public function admin_package_delete($id)
+    {
+        $data = Package::where('pack_id',$id)->first();
     }
 }

@@ -149,11 +149,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="{{route('admin-package-list')}}" class="nav-link link-dark">
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#table" />
                         </svg>
-                        Admin Blogs
+                        Package List
                     </a>
                 </li>
                 <li>
@@ -210,6 +210,14 @@
                             <div class="border p-3 rounded">
                                 <form class="row g-3" action="{{route('store-package')}}" method="post" enctype="multipart/form-data">
                                    @csrf    
+                                   <div class="col-12">
+                                    <label class="form-label">Package Type</label>
+                                    <br>
+                                    <input required type="radio" value='National' name="pack_type"> 
+                                    <span class="form-label">National</span>
+                                    <input required type="radio" value='International' name="pack_type"> 
+                                    <span class="form-label">International</span>
+                                    </div>
                                     <div class="col-12">
                                         <label class="form-label">Package title</label>
                                         <input required type="text" name="pack_title" class="form-control"

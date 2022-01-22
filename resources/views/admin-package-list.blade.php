@@ -7,11 +7,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Safarnama - Admin</title>
-
-    <link rel="stylesheet" href="{{url('css/raj.css')}}">
-
-    
-
+    <link rel="stylesheet" href="{{url('css/raj.css')}}"> 
     <!-- Bootstrap core CSS -->
 <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -111,7 +107,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="{{route('dashboard')}}" class="nav-link active" aria-current="page">
+        <a href="{{route('dashboard')}}" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
@@ -119,11 +115,11 @@
       <li>
         <a href="{{route('admin-user-blog')}}" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          User Blogs
+          User's Blogs
         </a>
       </li>
       <li>
-        <a href="{{route('admin-package-list')}}" class="nav-link link-dark">
+        <a href="{{route('admin-package-list')}}" class="nav-link link-dark active">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Package List
         </a>
@@ -147,7 +143,7 @@
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
+        <strong>Safarnama</strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
         <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -164,14 +160,46 @@
     </div>
   </div>
   
-  
+  <div class="" style="width:100%;overflow:scroll">
+    <br>
+    <table class='table'>
+    <tr>
+        <th scope="col">Package Title</th>
+        <th scope="col">Origin-Destination</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Price</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+    </tr>
+        @foreach ($package as $item)
+      <div>
+      <tr>
+           <td>{{$item->pack_title}}</td>
+           <td>{{$item->origin}} - {{$item->destination}}</td>
+           <td>{{$item->days}} Days - {{$item->nights}} Nights</td>
+           <td>{{$item->price}}</td>
+           <td>
+               <a href="{{route('admin-package-status',$item->pack_id)}}" class="btn {{( $item->status == 'Active')?'btn-primary' :'btn-danger'}} ">{{$item->status}}</a>    
+           </td>
+          <td>  
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
+              <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class='dropdown-item' href="{{route('admin-package-view',$item->pack_id)}}">View</a></li>
+                {{-- <li><hr class="dropdown-divider"></li> --}}
+                <li><a class='dropdown-item' href="{{route('admin-package-edit',$item->pack_id)}}">Edit</a></li>
+                {{-- <li><hr class="dropdown-divider"></li> --}}
+                <li><a class='dropdown-item' href="{{route('admin-package-delete',$item->pack_id)}}">Delete</a></li>
+                </li>
+              </ul>
+          </td>
+      </tr>
+    </div>
+      @endforeach
+    </table>
+  </div>
+</div>
 </main>
       <script src="{{url('js/sidebars.js')}}"></script>
       <script src="{{url('js/bootstrap.bundle.min.js')}}"></script>
-      <script>
-        $(document).ready(function() {
-          $('#table').DataTable();
-      } );
-       </script>
   </body>
 </html>
