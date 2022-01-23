@@ -1,17 +1,31 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="{{ url('css/raj.css') }}">
+    
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="{{ url('css/bootstrap.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url('css/animate.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('css/font-awesome.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('css/nexus.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('css/responsive.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('css/custom.css') }}" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans" type="text/css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css"><link rel="stylesheet" href="{{ url('css/raj.css') }}">
+    <link rel="stylesheet" href="{{ url('css/font-awesome.css') }}" rel="stylesheet">
+    
     <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=PT+Sans" type="text/css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <style>
         .more:hover {
             background-color: #e9e9e9;
@@ -21,13 +35,45 @@
         .more {
             padding: 5px 12px;
         }
-
+        a:link{
+            text-decoration: none;
+            color: black;
+        }
+        a:active{
+            text-decoration: none;
+            color: black;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="page-inner no-page-title">
+            <ul id="hornavmenu" class="nav navbar-nav">
+                <li>
+                    <a href="{{ '/' }}" class="fa-home">Home</a>
+                </li>
+                <li>
+                    <a href="{{ route('international-package-page') }}"><span class="fa-gears">International Tour</span></a>
+                </li>
+                <li>
+                    <a href="{{ route('package-page') }}"><span class="fa-copy">India's Tour</span></a>
+                </li>
+                <li>
+                    <a href="{{ route('Blogs-page') }}"><span class="fa-font">Blog</span></a>
+                </li>
+                <li>
+                    <a href="{{ '/about-us' }}"><span class="fa-th">About us</span></a>
+
+                </li>
+                <li>
+                    <a href="{{ '/contact-us' }}" class="fa-comment">Contact</a>
+                </li>
+            </ul>
             <!-- start page main wrapper -->
             <div dataidmain-wrapper">
                 <div class="row">
@@ -51,7 +97,7 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-borderless mb-0 text-muted">
-                                        <tbody>
+                                        <tbody style="font-size: 10px;">
                                             <tr>
                                                 <th scope="row">Email:</th>
                                                 <td>{{ $userdata->email }}</td>
@@ -85,8 +131,7 @@
                                             <input type="file" class="file" name="attechment" id="">
                                             <input type="hidden" name="user_id" value="{{ Session::get('user_id') }}">
                                             <hr />
-                                            <input type="submit" class="btn btn-outline-primary float-right"
-                                                Value="Post">
+                                            <input type="submit" class="btn btn-outline-primary float-right" Value="Post">
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +183,13 @@
                                                         </div>
                                                     </div>
                                                     @endforeach
-                                                    <textarea class="form-control" placeholder="Replay"></textarea>
+                                                <form action="{{route('reply-comment')}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="post_id" value ="@php echo $item['post_id']; @endphp">
+                                                    <input type="hidden" name="user_id" value ="{{Session::get('user_id')}}">
+                                                    <textarea class="form-control" placeholder="Replay" name='comment'></textarea>
+                                                    <input type="submit" class="btn btn-success"value="Reply" name="submit">
+                                                </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,6 +233,22 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+
+<script type="text/javascript" src="{{ url('js/jquery.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ url('js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ url('js/scripts.js') }}"></script>
+
+<script type="text/javascript" src="{{ url('js/jquery.isotope.js') }}" type="text/javascript"></script>
+
+<script type="text/javascript" src="{{ url('js/jquery.slicknav.js') }}" type="text/javascript"></script>
+
+<script type="text/javascript" src="{{ url('js/jquery.visible.js') }}" charset="utf-8"></script>
+
+<script type="text/javascript" src="{{ url('js/jquery.sticky.js') }}" charset="utf-8"></script>
+
+<script type="text/javascript" src="{{ url('js/slimbox2.js') }}" charset="utf-8"></script>
+
+<script src="{{ url('js/modernizr.custom.js') }}" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         CKEDITOR.replace('description');

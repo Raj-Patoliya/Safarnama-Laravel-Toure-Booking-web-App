@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\booking;
 use App\Models\comment;
 use App\Models\Continent;
 use App\Models\Country;
@@ -25,11 +26,10 @@ class UserController extends Controller
      */
     public function index(Request $req)
     {
-        $continent = Continent::all();
         $userid = $req->session()->get('user_id');
         $username = user_registration::where('user_id', '=', $userid)->get('fname');
         $package = Package::where('status','=','Active')->paginate(6);
-        return view('home', compact('continent', 'username','package'));
+        return view('home', compact( 'username','package'));
     }
     public function login(Request $request)
     {
@@ -242,14 +242,16 @@ class UserController extends Controller
         return redirect(route('user.login.success'));
     }
 
-    public function blogs_page()
+    public function blogs_page(Request $req)
     {
+        $userid = $req->session()->get('user_id');
+        $username = user_registration::where('user_id', '=', $userid)->get('fname');
         $blogs = post::where([
             ['status', '=', 'active']
         ])->paginate(3);
-        return view("Blogs-page", compact('blogs'));
+        return view("Blogs-page", compact('blogs','username'));
     }
-    public function read_blogs_page($id)
+    public function read_blogs_page(Request $req,$id)
     {
         $blog = post::where([
             ['post_id', '=', $id]
@@ -285,7 +287,10 @@ class UserController extends Controller
             $cdata[$i]['comment'] = $itm['comment'];
             $i++;
         }
-        return view('single-blog', compact('blog', 'cdata', 'user'));
+        $userid = $req->session()->get('user_id');
+        $username = user_registration::where('user_id', '=', $userid)->get('fname');
+        
+        return view('single-blog', compact('blog', 'cdata', 'user','username'));
     }
 
     public function post_comment(Request $req)
@@ -296,6 +301,16 @@ class UserController extends Controller
         $insert = comment::create($data);
         if ($insert == TRUE) {
             return redirect(route('read-blogs-page', $data['post_id']));
+        }
+    }
+    public function reply_comment(Request $req)
+    {
+        $data['post_id']  = $req->input('post_id');
+        $data['user_id'] = $req->input('user_id');
+        $data['comment'] = $req->input('comment');
+        $insert = comment::create($data);
+        if ($insert == TRUE) {
+            return redirect(route('user.login.success'));
         }
     }
 
@@ -310,7 +325,41 @@ class UserController extends Controller
         return view('Package', compact('username','data','multi_image'));
 
     }
+    public function package_page(Request $req)
+    {
+        $userid = $req->session()->get('user_id');
+        $username = user_registration::where('user_id', '=', $userid)->get('fname');
+        $data =  Package::where([
+            ['pack_type', '=', 'National'],
+            ['status', '=', 'Active']
+        ])->paginate(4);
+        return view('package-page',compact('username','data'));
+    }
+    public function international_package_page(Request $req)
+    {
+        $userid = $req->session()->get('user_id');
+        $username = user_registration::where('user_id', '=', $userid)->get('fname');
+        $data =  Package::where([
+            ['pack_type', '=', 'International'],
+            ['status', '=', 'Active']
+        ])->paginate(4);
+        return view('international-package-page',compact('username','data'));
+    }
+    public function book_package(Request $req)
+    {
+        $data['date'] = $req->input('book_date');
+        $data['people'] = $req->input('people');
+        $data['pack_id'] = $req->input('pack_id');
+        $data['user_id'] = $req->input('user_id');
+        $price = ((int)$req->input('price')*(int)$req->input('people'));
+        $data['amount'] = $price;
+        $insert = booking::create($data);
+        if($insert == TRUE)
+        {
+            echo "Package Booked";
+        }
 
+    }
 
     /* Admin Controls */
 
@@ -510,7 +559,6 @@ class UserController extends Controller
                 $name = time() . rand(1, 100) . '.' . $file->extension();
                 $file->move(public_path() . '\img\package', $name);  
                 $files[] = $name;
-                
             }
             foreach($files as $item)
             {
@@ -573,6 +621,30 @@ class UserController extends Controller
             $data['poster_image'] = $req->input('poster_image');
         }
         $update = Package::where('pack_id','=',$req->input('pack_id'))->update($data);
+        $multi_image_delete = Multi_images::where('pack_id','=',$data['pack_id'])->delete();
+        $id = $data['pack_id'];
+        $files = [];
+        if ($req->hasfile('image')) 
+        {
+            foreach ($req->file('image') as $file) {
+                $name = time() . rand(1, 100) . '.' . $file->extension();
+                $file->move(public_path() . '\img\package', $name);  
+                $files[] = $name;
+            }
+            foreach($files as $item)
+            {
+                $datas = array('pack_id'=>$id,"image"=>$item);
+                $ins = Multi_images::create($datas);
+            }
+        }
+        $oldfiles = [];
+        if ($req->input('image') != NULL) 
+        {
+            foreach ($req->input('image') as $file) {
+                $oldfiles =  array('pack_id'=>$id,"image"=>$file);
+                $ins = Multi_images::create($oldfiles);
+            }
+        }
         return redirect()->route('admin-package-list');        
     }
 }

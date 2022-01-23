@@ -74,141 +74,37 @@
                         <div class="text-center visible-lg">
                             <ul id="hornavmenu" class="nav navbar-nav">
                                 <li>
-                                    <a href="{{'/'}}" class="fa-home">Home</a>
+                                    <a href="{{ '/' }}" class="fa-home">Home</a>
                                 </li>
                                 <li>
-                                    <span class="fa-gears">Features</span>
-                                    <ul>
-                                        <li class="parent">
-                                            <span>Typography</span>
-                                            <ul>
-                                                <li>
-                                                    <a href="features-typo-basic.html">Basic Typography</a>
-                                                </li>
-                                                <li>
-                                                    <a href="features-typo-blockquotes.html">Blockquotes</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="parent">
-                                            <span>Components</span>
-                                            <ul>
-                                                <li>
-                                                    <a href="features-labels.html">Labels</a>
-                                                </li>
-                                                <li>
-                                                    <a href="features-progress-bars.html">Progress Bars</a>
-                                                </li>
-                                                <li>
-                                                    <a href="features-panels.html">Panels</a>
-                                                </li>
-                                                <li>
-                                                    <a href="features-pagination.html">Pagination</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="parent">
-                                            <span>Icons</span>
-                                            <ul>
-                                                <li>
-                                                    <a href="features-icons.html">Icons General</a>
-                                                </li>
-                                                <li>
-                                                    <a href="features-icons-social.html">Social Icons</a>
-                                                </li>
-                                                <li>
-                                                    <a href="features-icons-font-awesome.html">Font Awesome</a>
-                                                </li>
-                                                <li>
-                                                    <a href="features-icons-glyphicons.html">Glyphicons</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="features-testimonials.html">Testimonials</a>
-                                        </li>
-                                        <li>
-                                            <a href="features-accordions-tabs.html">Accordions & Tabs</a>
-                                        </li>
-                                        <li>
-                                            <a href="features-buttons.html">Buttons</a>
-                                        </li>
-                                        <li>
-                                            <a href="features-carousels.html">Carousels</a>
-                                        </li>
-                                        <li>
-                                            <a href="features-grid.html">Grid System</a>
-                                        </li>
-                                        <li>
-                                            <a href="features-animate-on-scroll.html">Animate On Scroll</a>
-                                        </li>
-                                    </ul>
+                                    <a href="{{ route('international-package-page') }}"><span class="fa-gears">International Tour</span></a>
                                 </li>
                                 <li>
-                                    <span class="fa-copy">Pages</span>
-                                    <ul>
-                                        <li>
-                                            <a href="pages-about-us.html">About Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-services.html">Services</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-faq.html">F.A.Q.</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-about-me.html">About Me</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-full-width.html">Full Width</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-left-sidebar.html">Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-right-sidebar.html">Right Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-login.html">Login</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-sign-up.html">Sign-Up</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-404.html">404 Error Page</a>
-                                        </li>
-                                    </ul>
+                                    <a href="{{ route('package-page') }}"><span class="fa-copy">India's Tour</span></a>
                                 </li>
                                 <li>
-                                    <span class="fa-th">Portfolio</span>
-                                    <ul>
-                                        <li>
-                                            <a href="portfolio-2-column.html">2 Column</a>
-                                        </li>
-                                        <li>
-                                            <a href="portfolio-3-column.html">3 Column</a>
-                                        </li>
-                                        <li>
-                                            <a href="portfolio-4-column.html">4 Column</a>
-                                        </li>
-                                        <li>
-                                            <a href="portfolio-6-column.html">6 Column</a>
-                                        </li>
-                                    </ul>
+                                    <a href="{{ route('Blogs-page') }}"><span class="fa-font">Blog</span></a>
                                 </li>
                                 <li>
-                                    <span class="fa-font">Blog</span>
-                                    <ul>
-                                        <li>
-                                            <a href="blog-list.html">Blog</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-single.html">Blog Single Item</a>
-                                        </li>
-                                    </ul>
+                                    <a href="{{ '/about-us' }}"><span class="fa-th">About us</span></a>
+    
                                 </li>
                                 <li>
-                                    <a href="{{'/contact-us'}}" class="fa-comment">Contact</a>
+                                    <a href="{{ '/contact-us' }}" class="fa-comment">Contact</a>
+                                </li>
+                                <li>
+                                    @if (Session::has('user_id'))
+    
+                                        <a href="{{ route('user.login.success') }}">@php
+                                            foreach ($username as $key) {
+                                                echo $key['fname'];
+                                            }
+                                        @endphp</a>
+                                    @else
+                                    <a href="{{ url('/user-login') }}"><span class="fa-user">Login</span></a>
+    
+                                    @endif
+    
                                 </li>
                             </ul>
                         </div>
@@ -384,55 +280,60 @@
                             <p>E Block, Central Secretariat,
                                 <br>New Delhi,
                                 <br>Delhi 110011,
-                                <br>India</p>
+                                <br>India
+                            </p>
                         </div>
-
+    
                         <div class="col-md-3 margin-bottom-20">
                             <h3 class="margin-bottom-10">About</h3>
                             <ul class="menu">
                                 <li>
-                                    <a class="fa-tasks" href="#">About us</a>
+                                    <a class="fa-tasks" href="{{'\about-us'}}">About us</a>
                                 </li>
                                 <li>
-                                    <a class="fa-users" href="#">Blog</a>
+                                    <a class="fa-users" href="{{route('Blogs-page')}}">Blog</a>
                                 </li>
                                 <li>
-                                    <a class="fa-signal" href="#">Holiday Package</a>
+                                    <a class="fa-signal" href="{{route('package-page')}}">Holidays in India</a>
                                 </li>
                                 <li>
-                                    <a class="fa-coffee" href="#">One Day Trip</a>
+                                    <a class="fa-coffee" href="{{route('international-package-page')}}">Holidays in Foreign</a>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-
+    
                         <div class="col-md-1"></div>
-
+    
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
                             <h3 class="color-gray margin-bottom-10"></h3>
                             <p>
                                 Term & Conditions
                                 <br>MEDICAL CERTIFICATE & NOC
-
-                            <a href="{{url('assets/Medical-Certificate-SafarNama.pdf')}}" download="Medical-Certificate-SafarNama.pdf"><button class="btn btn-primary btn-lg margin-top-20" id="medical"  type="button">Dowmload</button></a>
-                        </p>
-                          <br>
+    
+                                <a href="{{ url('assets/Medical-Certificate-SafarNama.pdf') }}"
+                                    download="Medical-Certificate-SafarNama.pdf"><button
+                                        class="btn btn-primary btn-lg margin-top-20" id="medical"
+                                        type="button">Dowmload</button></a>
+                            </p>
+                            <br>
                         </div>
-
+    
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-
+    
             <div id="footer">
                 <div class="container">
                     <div class="row">
                         <div id="copyright" class="col-md-12">
-                            <p class="pull-right">(c) 2014 Your Copyright Info</p>
+                            <p class="pull-right">(c) Safarnama 2022</p>
                         </div>
                     </div>
                 </div>
             </div>
+    
 
             <script type="text/javascript" src="{{url('js/jquery.min.js')}}" type="text/javascript"></script>
             <script type="text/javascript" src="{{url('js/bootstrap.min.js')}}" type="text/javascript"></script>

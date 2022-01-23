@@ -64,10 +64,37 @@
                         <div class="text-center visible-lg">
                             <ul id="hornavmenu" class="nav navbar-nav">
                                 <li>
-                                    <a href="{{'/'}}" class="fa-home">Home</a>
+                                    <a href="{{ '/' }}" class="fa-home">Home</a>
                                 </li>
                                 <li>
-                                    <a href="contact.html" class="fa-comment">Contact</a>
+                                    <a href="{{ route('international-package-page') }}"><span class="fa-gears">International Tour</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('package-page') }}"><span class="fa-copy">India's Tour</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('Blogs-page') }}"><span class="fa-font">Blog</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ '/about-us' }}"><span class="fa-th">About us</span></a>
+    
+                                </li>
+                                <li>
+                                    <a href="{{ '/contact-us' }}" class="fa-comment">Contact</a>
+                                </li>
+                                <li>
+                                    @if (Session::has('user_id'))
+    
+                                        <a href="{{ route('user.login.success') }}">@php
+                                            foreach ($username as $key) {
+                                                echo $key['fname'];
+                                            }
+                                        @endphp</a>
+                                    @else
+                                    <a href="{{ url('/user-login') }}"><span class="fa-user">Login</span></a>
+    
+                                    @endif
+    
                                 </li>
                             </ul>
                         </div>
@@ -285,56 +312,60 @@
                             <p>E Block, Central Secretariat,
                                 <br>New Delhi,
                                 <br>Delhi 110011,
-                                <br>India</p>
+                                <br>India
+                            </p>
                         </div>
-
+    
                         <div class="col-md-3 margin-bottom-20">
                             <h3 class="margin-bottom-10">About</h3>
                             <ul class="menu">
                                 <li>
-                                    <a class="fa-tasks" href="#">About us</a>
+                                    <a class="fa-tasks" href="{{'\about-us'}}">About us</a>
                                 </li>
                                 <li>
-                                    <a class="fa-users" href="#">Blog</a>
+                                    <a class="fa-users" href="{{route('Blogs-page')}}">Blog</a>
                                 </li>
                                 <li>
-                                    <a class="fa-signal" href="#">Holiday Package</a>
+                                    <a class="fa-signal" href="{{route('package-page')}}">Holidays in India</a>
                                 </li>
                                 <li>
-                                    <a class="fa-coffee" href="#">One Day Trip</a>
+                                    <a class="fa-coffee" href="{{route('international-package-page')}}">Holidays in Foreign</a>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-
+    
                         <div class="col-md-1"></div>
-
+    
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
                             <h3 class="color-gray margin-bottom-10"></h3>
                             <p>
                                 Term & Conditions
                                 <br>MEDICAL CERTIFICATE & NOC
-
-                            <a href="{{url('assets/Medical-Certificate-SafarNama.pdf')}}" download="Medical-Certificate-SafarNama.pdf"><button class="btn btn-primary btn-lg margin-top-20" id="medical"  type="button">Dowmload</button></a>
-                        </p>
-                          <br>
+    
+                                <a href="{{ url('assets/Medical-Certificate-SafarNama.pdf') }}"
+                                    download="Medical-Certificate-SafarNama.pdf"><button
+                                        class="btn btn-primary btn-lg margin-top-20" id="medical"
+                                        type="button">Dowmload</button></a>
+                            </p>
+                            <br>
                         </div>
-
+    
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-
+    
             <div id="footer">
                 <div class="container">
                     <div class="row">
                         <div id="copyright" class="col-md-12">
-                            <p class="pull-right">(c) 2014 Your Copyright Info</p>
+                            <p class="pull-right">(c) Safarnama 2022</p>
                         </div>
                     </div>
                 </div>
             </div>
-
+    
             <script type="text/javascript" src="{{url('js/jquery.min.js')}}" type="text/javascript"></script>
             <script type="text/javascript" src="{{url('js/bootstrap.min.js')}}" type="text/javascript"></script>
             <script type="text/javascript" src="{{url('js/scripts.js')}}"></script>

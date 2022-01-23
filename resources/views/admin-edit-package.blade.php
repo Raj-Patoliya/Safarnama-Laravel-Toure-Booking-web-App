@@ -290,7 +290,7 @@
                                             value="{{$data->end_date}}" required>
                                         </div>
                                     </div>
-                                    <form class="row g-3" action="{{route('store-package')}}" method="post" enctype="multipart/form-data">
+                                    <form class="row g-3" action="{{route('update-package')}}" method="post" enctype="multipart/form-data">
                                         @csrf    
                                     
                                     <div class="row gy-3" id="dynamicAddRemove">
@@ -304,16 +304,12 @@
                                         <table>
                                             @foreach($image_data as $image_data)
                                         <tr class="row gy-3">
-                                            <td class="col-md-6"> 
-                                                <input type="file" name="image[]" class="form-control">
-                                            </td>
-                                            <td class="col-md-6">
+                                            <td class="col-md-10">
                                                 <img src="http://localhost:8000/img/package/@php echo $image_data['image']; @endphp" style="height:200px; width:300px;">
-                                                <input type="hidden" name="image[]" value ="{{$image_data->image}}" class="form-control">
-                                                
+                                                <input type="hidden" name="image[]" value ="{{$image_data->image}}" class="form-control">   
                                             </td>
                                             <td class="col-md-2 text-end d-grid">
-                                                <button type="button" class="btn btn-danger remove-input-field">Delete</button>
+                                                <button type="button" class="btn btn-danger remove-input-field" style="height: 45px;">Delete</button>
                                             </td>
                                         </tr>
                                         @endforeach

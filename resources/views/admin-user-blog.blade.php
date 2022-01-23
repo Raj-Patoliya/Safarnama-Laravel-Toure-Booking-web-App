@@ -176,7 +176,7 @@
           echo $value['name'];
         }
        @endphp </td>
-      <td> <a href="admin-users-blog-status/@php echo $item['post_id'] @endphp"  class="btn @php if($item['status'] == 'active'){echo"btn-success";} else if($item['status'] == 'deactive'){echo"btn-danger";}else{echo"btn-warning";} @endphp"> @php echo $item['status']; @endphp </a>
+      <td> <a href="admin-users-blog-status/@php echo $item['post_id'] @endphp"  class="btn @php if($item['status'] == 'active'){echo"btn-success";} else if($item['status'] == 'deactive'){echo"btn-danger";}else{echo"btn-warning";} @endphp"> @php if($item['status'] == 'active'){echo"Active";}else{echo"Deactive";} @endphp</a>
       <a href="admin-user-blog-read/@php echo $item['post_id']; @endphp" class="btn btn-primary">Read Blog</a> </td>
     </tr>
     @endforeach

@@ -49,10 +49,23 @@
                         <div class="text-center visible-lg">
                             <ul id="hornavmenu" class="nav navbar-nav">
                                 <li>
-                                    <a href="{{'/'}}" class="fa-home">Home</a>
+                                    <a href="{{ '/' }}" class="fa-home">Home</a>
                                 </li>
                                 <li>
-                                    <a href="{{'/about-us'}}"><span class="fa-th">About us</span></a>
+                                    <a href="{{ route('international-package-page') }}"><span class="fa-gears">International Tour</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('package-page') }}"><span class="fa-copy">India's Tour</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('Blogs-page') }}"><span class="fa-font">Blog</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ '/about-us' }}"><span class="fa-th">About us</span></a>
+    
+                                </li>
+                                <li>
+                                    <a href="{{ '/contact-us' }}" class="fa-comment">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -153,87 +166,74 @@
             <div id="base">
                 <div class="container padding-vert-30 margin-top-60">
                     <div class="row">
-                        <!-- Contact Details -->
                         <div class="col-md-4 margin-bottom-20">
                             <h3 class="margin-bottom-10">Contact Details</h3>
                             <p>
-                                <span class="fa-phone">Telephone:</span>(212)888-77-88
+                                <span class="fa-phone">Telephone:</span>(+91)88888 88888
                                 <br>
                                 <span class="fa-envelope">Email:</span>
-                                <a href="mailto:info@joomla51.com">info@joomla51.com</a>
+                                <a href="#">safarnama@aol.com</a>
                                 <br>
                                 <span class="fa-link">Website:</span>
-                                <a href="http://www.joomla51.com">www.joomla51.com</a>
+                                <a href="#">www.safarnama.com</a>
                             </p>
-                            <p>The Dunes, Top Road,
-                                <br>Strandhill,
-                                <br>Co. Sligo,
-                                <br>Ireland</p>
+                            <p>E Block, Central Secretariat,
+                                <br>New Delhi,
+                                <br>Delhi 110011,
+                                <br>India
+                            </p>
                         </div>
-                        <!-- End Contact Details -->
-                        <!-- Sample Menu -->
+    
                         <div class="col-md-3 margin-bottom-20">
-                            <h3 class="margin-bottom-10">Sample Menu</h3>
+                            <h3 class="margin-bottom-10">About</h3>
                             <ul class="menu">
                                 <li>
-                                    <a class="fa-tasks" href="#">Placerat facer possim</a>
+                                    <a class="fa-tasks" href="{{'\about-us'}}">About us</a>
                                 </li>
                                 <li>
-                                    <a class="fa-users" href="#">Quam nunc putamus</a>
+                                    <a class="fa-users" href="{{route('Blogs-page')}}">Blog</a>
                                 </li>
                                 <li>
-                                    <a class="fa-signal" href="#">Velit esse molestie</a>
+                                    <a class="fa-signal" href="{{route('package-page')}}">Holidays in India</a>
                                 </li>
                                 <li>
-                                    <a class="fa-coffee" href="#">Nam liber tempor</a>
+                                    <a class="fa-coffee" href="{{route('international-package-page')}}">Holidays in Foreign</a>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-                        <!-- End Sample Menu -->
+    
                         <div class="col-md-1"></div>
-                        <!-- Disclaimer -->
+    
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
-                            <h3 class="color-gray margin-bottom-10">Join our Newsletter</h3>
+                            <h3 class="color-gray margin-bottom-10"></h3>
                             <p>
-                                Sign up for our newsletter for all the
-                                <br>latest news and information
+                                Term & Conditions
+                                <br>MEDICAL CERTIFICATE & NOC
+    
+                                <a href="{{ url('assets/Medical-Certificate-SafarNama.pdf') }}"
+                                    download="Medical-Certificate-SafarNama.pdf"><button
+                                        class="btn btn-primary btn-lg margin-top-20" id="medical"
+                                        type="button">Dowmload</button></a>
                             </p>
-                            <input type="email">
                             <br>
-                            <button class="btn btn-primary btn-lg margin-top-20" type="button">Subscribe</button>
                         </div>
-                        <!-- End Disclaimer -->
+    
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-            <!-- Footer Menu -->
+    
             <div id="footer">
                 <div class="container">
                     <div class="row">
-                        <div id="footermenu" class="col-md-8">
-                            <ul class="list-unstyled list-inline">
-                                <li>
-                                    <a href="#" target="_blank">Sample Link</a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">Sample Link</a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">Sample Link</a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">Sample Link</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="copyright" class="col-md-4">
-                            <p class="pull-right">(c) 2014 Your Copyright Info</p>
+                        <div id="copyright" class="col-md-12">
+                            <p class="pull-right">(c) Safarnama 2022</p>
                         </div>
                     </div>
                 </div>
             </div>
+    
             <!-- End Footer Menu -->
             <!-- JS -->
             <script type="text/javascript" src="assets/js/jquery.min.js" type="text/javascript"></script>

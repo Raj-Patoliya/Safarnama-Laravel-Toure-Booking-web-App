@@ -174,7 +174,7 @@
           <td>{{$item->title}}</td>
           <td><img src="http://localhost:8000/img/post/{{$item->attechment}}" style="height:100px;width:100px;border-radius:50%;"alt=""></td>
           <td>
-              <a href="{{route('admin-user-blog-status',$item->post_id)}}" class="btn @php if($item['status'] == 'active'){echo"btn-success";}else{echo"btn-warning";} @endphp ">{{$item->status}}</a> 
+              <a href="{{route('admin-user-blog-status',$item->post_id)}}" class="btn @php if($item['status'] == 'active'){echo"btn-success";}else{echo"btn-warning";} @endphp ">@php if($item['status'] == 'active'){echo"Active";}else{echo"Deactive";} @endphp </a> 
               <a href="{{route('admin-user-blog-read',$item->post_id)}}" class="btn btn-primary">Read Blog</a> 
           </td>
       </tr>

@@ -23,6 +23,7 @@ Route::view('/user-login','user-login');
 Route::view('/contact-us','contact-us');
 Route::view('/about-us', 'about-us');
 Route::view('/admin-add-package','admin-add-package')->name('admin-add-package');
+Route::view('/package-page', 'package-page');
 
 
 Route::resource('/','App\Http\Controllers\UserController');
@@ -40,9 +41,12 @@ Route::match(['get', 'post'],'update-profile', [UserController::class, 'update_p
 Route::match(['get', 'post'],'Blogs-page', [UserController::class, 'blogs_page'])->name('Blogs-page');
 Route::match(['get', 'post'],'read-blogs-page/{id}', [UserController::class, 'read_blogs_page'])->name('read-blogs-page');
 Route::match(['get', 'post'],'post-comment', [UserController::class, 'post_comment'])->name('post-comment');
+Route::match(['get', 'post'],'reply-comment', [UserController::class, 'reply_comment'])->name('reply-comment');
 Route::match(['get', 'post'],'store-package', [UserController::class, 'store_package'])->name('store-package');
-Route::match(['get', 'post'],'update-package', [UserController::class, 'update_package'])->name('update-package');
 Route::get('single-package/{id}', [UserController::class, 'single_package'])->name('single-package');
+Route::match(['get', 'post'],'package-page', [UserController::class, 'package_page'])->name('package-page');
+Route::match(['get', 'post'],'international-package-page', [UserController::class, 'international_package_page'])->name('international-package-page');
+Route::match(['get', 'post'],'book-package', [UserController::class, 'book_package'])->name('book-package');
 
 
 Route::get('apis', function () {
@@ -73,5 +77,6 @@ Route::group(['middleware' => 'disablebackbtn'], function () {
         Route::get('admin-package-delete/{id}', [UserController::class, 'admin_package_delete'])->name('admin-package-delete');
         Route::get('admin-package-edit/{id}', [UserController::class, 'admin_package_edit'])->name('admin-package-edit');
         Route::get('admin-package-view/{id}', [UserController::class, 'admin_package_view'])->name('admin-package-view');
+        Route::match(['get', 'post'],'update-package', [UserController::class, 'update_package'])->name('update-package');
     });
 });
