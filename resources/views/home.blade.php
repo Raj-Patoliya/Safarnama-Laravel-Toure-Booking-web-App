@@ -150,7 +150,7 @@
             <div class="container background-white">
                 <div class="row padding-vert-40">
                     <div class="col-md-12">
-                        <h2 class="animate fadeIn text-center">Work Travel Save Repeate!</h2>
+                        <h2 class="animate fadeIn text-center">Work Travel Save Repeat! !</h2>
                         <p class="animate fadeIn text-center">The journey of a thousand miles begins with a single step.
                         </p>
                         <p class="animate fadeInUp text-center">

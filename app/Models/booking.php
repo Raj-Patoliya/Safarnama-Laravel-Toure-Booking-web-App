@@ -13,7 +13,9 @@ class booking extends Model
         'book_id',
         'pack_id',
         'user_id',
+        'people',
         'amount',
         'date',
+        'payment_status'
     ];
 }

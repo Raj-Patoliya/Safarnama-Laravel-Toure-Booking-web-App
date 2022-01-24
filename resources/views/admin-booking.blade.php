@@ -111,7 +111,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="{{route('dashboard')}}" class="nav-link active" aria-current="page">
+        <a href="{{route('dashboard')}}" class="nav-link link-dark" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
@@ -143,7 +143,7 @@
       </a>
     </li>
     <li>
-      <a href="{{route('admin-booking')}}" class="nav-link link-dark">
+      <a href="{{route('admin-booking')}}" class="nav-link link-dark active">
         <i class='fas fa-hotel'></i>
         Bookings
       </a>
@@ -168,6 +168,34 @@
         </li>
       </ul>
     </div>
+  </div>
+     <div class="" style="width:100%;overflow:scroll">
+    <br>
+    <table class='table'>
+    <tr>
+        <th scope="col">Booking ID</th>
+        <th scope="col">Package ID</th>
+        <th scope="col">User ID</th>
+        <th scope="col">Price</th>
+        <th scope="col">Nos of People</th>
+        <th scope="col">Journey Date</th>
+        <th scope="col">Payment Status</th>
+    </tr>
+         @foreach ($booking as $item)
+      <div>
+      <tr>
+           <td>{{$item->book_id}}</td>
+           <td>{{$item->pack_id}}</td>
+           <td>{{$item->user_id}}</td>
+           <td>{{$item->amount}}</td>
+           <td>{{$item->people}}</td>
+           <td>{{$item->date}}</td>
+           <td>{{$item->payment_status}}</td>
+      </tr>
+    </div>
+      @endforeach 
+    </table>
+  </div>
   </div>
   
   

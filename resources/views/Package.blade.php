@@ -343,6 +343,7 @@
                                     echo $item['price'] . ' ₹';
                                 @endphp</h3>
                             </div>
+                            @if(Session::has('user_id'))
                             <div class="panel-body">
                                 <form action="{{route('book-package')}}" method="post">
                                     @csrf
@@ -357,6 +358,14 @@
                                     <input type="submit" name="submit" id="submit" value="Book" class="btn btn-primary form-control">
                             </form>
                             </div>
+                            @else
+                            <div class="panel-body">
+                                <p style="font-size: 15px;">For Booking Please Login</p>
+                                <a href="{{ url('/user-login') }}" class="btn btn-green"><span
+                                    class="fa-user">Login</span></a>
+                                
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

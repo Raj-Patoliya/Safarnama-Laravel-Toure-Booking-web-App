@@ -351,6 +351,7 @@ class UserController extends Controller
         $data['people'] = $req->input('people');
         $data['pack_id'] = $req->input('pack_id');
         $data['user_id'] = $req->input('user_id');
+        $data['payment_status'] = ' ';
         $price = ((int)$req->input('price')*(int)$req->input('people'));
         $data['amount'] = $price;
         $insert = booking::create($data);
@@ -358,17 +359,16 @@ class UserController extends Controller
         {
             echo "Package Booked";
         }
-
     }
 
-    /* Admin Controls */
-
+/********************************************Admin Controls******************************/
+    
     public function admin_user_management(Request $req)
     {
-
         $user = user_registration::all();
         return view('admin-user-management', compact('user'));
     }
+    
     public function admin_user_blog_list(Request $req, $id)
     {
         $data =  post::where([
@@ -503,12 +503,6 @@ class UserController extends Controller
             return redirect('/');
         }
     }
-    public function apis()
-    {
-        $author = user_registration::all();
-        return $author;
-        // return response()->json(['author'=>$author],200);
-    }
     public function delete_post($id)
     {
         $delete =  post::where([
@@ -520,7 +514,7 @@ class UserController extends Controller
     }
     public function edit_post(Request $request, $id)
     {
-        // return view('user-edit-post');
+
         $post = post::where([
             ['post_id', '=', $id],
         ])->get();
@@ -583,8 +577,6 @@ class UserController extends Controller
         $data = Package::where('pack_id',$id)->first();
         $image_data = Multi_images::where('pack_id',$id)->get();
         return view('admin-edit-package',compact('data','image_data'));
-        // return $data;
-
     }
     public function admin_package_delete($id)
     {
@@ -646,5 +638,10 @@ class UserController extends Controller
             }
         }
         return redirect()->route('admin-package-list');        
+    }
+    public function admin_booking()
+    {
+        $booking = booking::all();
+        return view('admin-booking',compact('booking'));
     }
 }

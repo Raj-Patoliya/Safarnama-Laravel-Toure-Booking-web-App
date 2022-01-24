@@ -17,8 +17,10 @@ class CreateBookingTable extends Migration
             $table->integer('book_id')->primary();
             $table->string('pack_id');
             $table->string('user_id');
+            $table->string('people');
             $table->integer('amount');
             $table->date('date');
+            $table->string('payment_status');
         });
     }
     /**
