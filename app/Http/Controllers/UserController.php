@@ -360,6 +360,37 @@ class UserController extends Controller
             echo "Package Booked";
         }
     }
+    public function user_booking($id)
+    {
+        $data = [];
+        $packid = [];
+        $x = 0;
+        $booking = booking::where('user_id','=',$id)->get();
+        foreach($booking as $item)  
+        {
+            $data[$x]['people'] = $item['people'];
+            $data[$x]['amount'] = $item['amount'];
+            $data[$x]['date'] = $item['date'];
+            $packid['pack_id'][$x]= $item['pack_id'];
+            $x++;
+        }
+        $x= 0;
+        foreach($packid['pack_id'] as $pack_id)
+        {
+            $package = Package::where('pack_id','=',$pack_id)->get();
+            foreach($package as $item)  
+            {
+                $data[$x]['pack_title'] = $item['pack_title'];
+                $data[$x]['days'] = $item['days'];
+                $data[$x]['nights'] = $item['nights'];
+                $data[$x]['origin'] = $item['origin'];
+                $data[$x]['payment_status'] = $item['payment_status'];
+                $x++;
+            }
+        }
+        // return $data;
+        return view('view-bookings', compact('data'));
+    }
 
 /********************************************Admin Controls******************************/
     

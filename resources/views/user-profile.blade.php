@@ -205,9 +205,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="team-member">
-                                    <a class='btn btn-danger btn-sm' href="{{ 'user-logout' }}">Logout</a>
-                                    <a class='btn btn-secondary btn-sm' href="{{route('edit-profile',Session::get('user_id'))}}">Edit Profile</a>
-                                </div>
+                                    <a class='btn btn-danger btn-lg' href="{{ 'user-logout' }}">Logout</a>
+                                    <a class='btn btn-secondary btn-lg' href="{{route('edit-profile',Session::get('user_id'))}}">Edit Profile</a>
+                                </div><br>
+                                    <a class='btn btn-success btn-lg' href="{{route('user-booking',Session::get('user_id'))}}">Bookings</a>
                             </div>
                         </div>
                         <div class="card card-white grid-margin">
