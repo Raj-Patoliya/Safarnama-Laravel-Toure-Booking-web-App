@@ -48,6 +48,8 @@ Route::get('single-package/{id}', [UserController::class, 'single_package'])->na
 Route::match(['get', 'post'],'package-page', [UserController::class, 'package_page'])->name('package-page');
 Route::match(['get', 'post'],'international-package-page', [UserController::class, 'international_package_page'])->name('international-package-page');
 Route::match(['get', 'post'],'book-package', [UserController::class, 'book_package'])->name('book-package');
+Route::match(['get', 'post'],'payment-page/{id}', [UserController::class, 'payment_page'])->name('payment-page');
+Route::match(['get', 'post'],'payment-paid', [UserController::class, 'payment_paid'])->name('payment-paid');
 
 
 Route::get('apis', function () {

@@ -181,12 +181,6 @@
                     <strong>Safarnama</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
                     <li>
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
@@ -333,7 +327,7 @@
         ++i;
 
         $("#dynamicAddRemove").append(
-
+            
             '<tr class="row gy-3"><td class="col-md-10"> <input type="file" name="image[]" class="form-control"></td><td class="col-md-2 text-end d-grid"><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>'
 
         );

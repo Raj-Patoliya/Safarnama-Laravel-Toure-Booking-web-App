@@ -21,6 +21,7 @@ class CreateBookingTable extends Migration
             $table->integer('amount');
             $table->date('date');
             $table->string('payment_status');
+            $table->string('payment_id');
         });
     }
     /**

@@ -156,13 +156,11 @@
                                                         data-id="@php echo $item['post_id'];@endphp"></i>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                         <li  data-id="@php echo $item['post_id']; @endphp">
-                                                            <a class="dropdown-item" href="etid-post/@php echo $item['post_id']; @endphp">Edit Post</a>
+                                                            <a class="dropdown-item" href="edit-post/@php echo $item['post_id']; @endphp">Edit Post</a>
                                                         </li>
                                                         </li>
                                                         <li><a class="dropdown-item"
                                                                 href="delete-post/@php echo $item['post_id']; @endphp">Detele Post</a>
-                                                        </li>
-                                                        <li><a class="dropdown-item" href="#">Something else here</a>
                                                         </li>
                                                     </ul>
                                                 </div>

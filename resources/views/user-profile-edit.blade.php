@@ -126,7 +126,6 @@
                                 <input class="form-control" type="file" name="profile" id="formFile">
                                 <input type="hidden" name="profile" value="@php echo $data['images']; @endphp">
                                 <img src="	http://localhost:8000/img/profiles/@php echo $data['images']; @endphp" class="user-profile-image rounded-circle" alt="asds" />
-                                {{-- <img src="img\profiles\" alt="dfsf"> --}}
                                 <hr>
                                 
                                 <div class="row">
@@ -137,13 +136,10 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- End Register Box -->
                     </div>
                 </div>
             </div>
             @endforeach
-            <!-- === END CONTENT === -->
-            <!-- === BEGIN FOOTER === -->
             <div id="content-bottom-border" class="container">
             </div>
             <div id="base">

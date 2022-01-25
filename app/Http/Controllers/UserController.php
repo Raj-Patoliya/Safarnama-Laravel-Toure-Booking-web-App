@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
+use function Symfony\Component\VarDumper\Dumper\esc;
+
 class UserController extends Controller
 {
     /**
@@ -354,44 +356,83 @@ class UserController extends Controller
         $data['payment_status'] = ' ';
         $price = ((int)$req->input('price')*(int)$req->input('people'));
         $data['amount'] = $price;
+        $data['payment_status'] = "Pending";
+        $data['payment_id'] = "NULL";
         $insert = booking::create($data);
         if($insert == TRUE)
         {
-            echo "Package Booked";
+            return redirect()->route('user-booking',$data['user_id']);
         }
     }
     public function user_booking($id)
     {
-        $data = [];
-        $packid = [];
-        $x = 0;
-        $booking = booking::where('user_id','=',$id)->get();
-        foreach($booking as $item)  
+        $bookings = booking::where('user_id','=',$id)->count();
+        if($bookings > 0)
         {
-            $data[$x]['people'] = $item['people'];
-            $data[$x]['amount'] = $item['amount'];
-            $data[$x]['date'] = $item['date'];
-            $packid['pack_id'][$x]= $item['pack_id'];
-            $x++;
-        }
-        $x= 0;
-        foreach($packid['pack_id'] as $pack_id)
-        {
-            $package = Package::where('pack_id','=',$pack_id)->get();
-            foreach($package as $item)  
+            $data = [];
+            $packid = [];
+            $x = 0;
+            $booking = booking::where('user_id','=',$id)->get();
+            foreach($booking as $item)  
             {
-                $data[$x]['pack_title'] = $item['pack_title'];
-                $data[$x]['days'] = $item['days'];
-                $data[$x]['nights'] = $item['nights'];
-                $data[$x]['origin'] = $item['origin'];
+                $data[$x]['book_id'] = $item['book_id'];
+                $data[$x]['people'] = $item['people'];
+                $data[$x]['amount'] = $item['amount'];
+                $data[$x]['date'] = $item['date'];
                 $data[$x]['payment_status'] = $item['payment_status'];
+
+                $packid['pack_id'][$x]= $item['pack_id'];
                 $x++;
             }
+            $x= 0;
+            foreach($packid['pack_id'] as $pack_id)
+            {
+                $package = Package::where('pack_id','=',$pack_id)->get();
+                foreach($package as $item)  
+                {
+                    $data[$x]['pack_title'] = $item['pack_title'];
+                    $data[$x]['days'] = $item['days'];
+                    $data[$x]['nights'] = $item['nights'];
+                    $data[$x]['origin'] = $item['origin'];
+                    $x++;
+                }
+            }
+            // return $data;
+            return view('view-bookings', compact('data'));
         }
-        // return $data;
-        return view('view-bookings', compact('data'));
+        else
+        {
+            return redirect()->route('user.login.success'); 
+        }
+    }
+    public function payment_page($id)
+    {
+        $data = [];
+        $booking = booking::where('book_id',$id)->get();
+        foreach($booking as $booking)
+        {
+            $data['book_id'] = $booking['book_id']; 
+            $data['amount'] = $booking['amount']; 
+            $email = user_registration::where('user_id','=',$booking['user_id'])->get('email');
+            foreach($email as $email)
+            {
+                $data['email'] =$email['email'];
+            }
+            $phone = user_registration::where('user_id','=',$booking['user_id'])->get('phone');
+            foreach($phone as $phone)
+            {
+                $data['phone'] =$phone['phone'];
+            }
+        }
+        return view('payment-page',compact('data'));
     }
 
+    public function payment_paid(Request $req)
+    {
+        $payment_id = $req->input('payment_id');
+        $book_id = $req->input('book_id');
+        return "$payment_id";
+    }
 /********************************************Admin Controls******************************/
     
     public function admin_user_management(Request $req)

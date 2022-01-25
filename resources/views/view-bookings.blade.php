@@ -84,14 +84,18 @@
                         <h4 class="card-title"> <a href="{{route('user.login.success')}}">Profile</a> <b>></b> Booking </h4>
                     </div>
                     <div class="card-body">
-                        <table>
-                            <th>Tour Name</th>
-                            <th>Travel Date</th>
-                            <th>Source Location</th>
-                            <th>Duration</th>
-                            <th>Persons</th>
-                            <th>Total Amount</th>
-                            <th>Payment Status</th>
+                        <table class="table" style="font-size: 1.2rem;">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th  scope="col">Tour Name</th>
+                                    <th scope="col">Travel Date</th>
+                                    <th scope="col">Source Location</th>
+                                    <th scope="col">Persons</th>
+                                    <th scope="col">Duration</th>
+                                    <th scope="col">Total Amount</th>
+                                    <th scope="col">Payment Status</th>
+                                </tr>
+                        </thead>
                             @php
                                 $x = sizeof($data);
                             @endphp
@@ -111,10 +115,12 @@
                                 @endphp</td>
                                 <td>@php
                                     echo $data[$i]['days'].' Days - '.$data[$i]['nights'].' Nights';
+                                @endphp</td><td>@php
+                                    echo $data[$i]['amount'];
                                 @endphp</td>
-                                <td>@php
+                                <td><a href="{{route('payment-page',$data[$i]['book_id'])}}" class="btn btn-bronze">@php
                                     echo $data[$i]['payment_status'];
-                                @endphp</td>
+                                @endphp<a></td>
                             </tr>
                             @endfor
                         </table>

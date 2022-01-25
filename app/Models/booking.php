@@ -16,6 +16,7 @@ class booking extends Model
         'people',
         'amount',
         'date',
-        'payment_status'
+        'payment_status',
+        'payment_id'
     ];
 }
