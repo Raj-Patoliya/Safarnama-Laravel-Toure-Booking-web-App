@@ -118,9 +118,15 @@
                                 @endphp</td><td>@php
                                     echo $data[$i]['amount'];
                                 @endphp</td>
-                                <td><a href="{{route('payment-page',$data[$i]['book_id'])}}" class="btn btn-bronze">@php
-                                    echo $data[$i]['payment_status'];
-                                @endphp<a></td>
+                                <td>
+                                    @if($data[$i]['payment_status'] == 'pending')
+                                    <a href="{{route('payment-page',$data[$i]['book_id'])}}" class="btn btn-bronze">@php
+                                        echo $data[$i]['payment_status'];
+                                        @endphp<a>
+                                    @else
+                                        @php echo $data[$i]['payment_status'];@endphp
+                                    @endif
+                                </td>
                             </tr>
                             @endfor
                         </table>

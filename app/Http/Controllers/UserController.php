@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Models\multi_imagae;
 use App\Models\Multi_images;
 use App\Models\Package;
+use Razorpay\Api\Api;
 use App\Models\post;
 use App\Models\User;
 use App\Models\user_registration;
@@ -353,7 +354,6 @@ class UserController extends Controller
         $data['people'] = $req->input('people');
         $data['pack_id'] = $req->input('pack_id');
         $data['user_id'] = $req->input('user_id');
-        $data['payment_status'] = ' ';
         $price = ((int)$req->input('price')*(int)$req->input('people'));
         $data['amount'] = $price;
         $data['payment_status'] = "Pending";
@@ -413,15 +413,12 @@ class UserController extends Controller
         {
             $data['book_id'] = $booking['book_id']; 
             $data['amount'] = $booking['amount']; 
-            $email = user_registration::where('user_id','=',$booking['user_id'])->get('email');
+            $email = user_registration::where('user_id','=',$booking['user_id'])->get();
             foreach($email as $email)
             {
+                $data['user_id'] =$email['user_id'];
+                $data['phone'] =$email['phone'];
                 $data['email'] =$email['email'];
-            }
-            $phone = user_registration::where('user_id','=',$booking['user_id'])->get('phone');
-            foreach($phone as $phone)
-            {
-                $data['phone'] =$phone['phone'];
             }
         }
         return view('payment-page',compact('data'));
@@ -429,9 +426,12 @@ class UserController extends Controller
 
     public function payment_paid(Request $req)
     {
-        $payment_id = $req->input('payment_id');
-        $book_id = $req->input('book_id');
-        return "$payment_id";
+        $data['user_id'] =$req->input('user_id');
+        $book_id =$req->input('book_id');
+        $update =  booking::where([
+            ['book_id', '=', $book_id]
+        ])->update(['payment_status' => 'Paid']);
+        return redirect()->route('user-booking',$data['user_id']);
     }
 /********************************************Admin Controls******************************/
     

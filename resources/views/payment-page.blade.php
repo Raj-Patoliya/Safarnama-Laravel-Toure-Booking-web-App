@@ -1,50 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-		<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-        <script src="js/jquery-1.12.5.min.js"></script>
-<script type="text/javascript">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Safarnama</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
 
-        var options = {
-            "key": "rzp_test_hUp5HJPqFK8qsv",
-            "amount": "<?php echo round($data['amount'])*100; ?>",
-            "currency": "INR",
-            "name": "Safarnama",
-            "description": "A journey of thousand miles begins with Single Step..!!",
-            // "image": "images/logo.png",
-            "handler": function (response){
-                var form = $(document.createElement('form'));
-                $(form).attr("action", "{{route('payment-paid')}}");
-                $(form).attr("method", "POST");
-                $(form).css("display", "none");
-                var payment_id = $("<input>").attr("type", "text").attr("name", "payment_id").val(response.razorpay_payment_id );
-                var id = $("<input>").attr("type", "text").attr("name", "id").val(<?php echo $data['book_id']; ?> );
-                var total = $("<input>").attr("type", "text").attr("name", "total").val(<?php echo $data['amount']; ?> );
-                $(form).append($(payment_id));
-                $(form).append($(total));
-                $(form).append($(id));
-                form.appendTo( document.body );
-                $(form).submit();
-            },
-    "prefill": {
-        "name": "Safarnama",
-        "email": "<?php echo $data['email'];?>",
-        "contact": "<?php echo $data['phone']?>"
-    },
-    "notes": {
-        "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-        "color": "#36454F"
-    },
-    "modal": {
-        "ondismiss": function(){
-            history.back();
-        }
-    }
-    };
-        var rzp1 = new Razorpay(options);
-        rzp1.on('payment.failed', function (response){
-            alert(response.error.description);
-        });
-        rzp1.open();
-
+<body>
+    <div id="app">
+        <main class="py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-3 col-md-offset-6">
+                        @if ($message = Session::get('error'))
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>Error!</strong> {{ $message }}
+                            </div>
+                        @endif
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-dismissible fade {{ Session::has('success') ? 'show' : 'in' }}"
+                                role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <strong>Success!</strong> {{ $message }}
+                            </div>
+                        @endif
+                        <div class="card card-default">
+                            <div class="card-header">
+                                Safarnama Payment Page
+                            </div>
+                            <div class="card-body text-center">
+                                <form action="{{ route('payment-paid') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="book_id" value="@php echo $data['book_id']; @endphp">
+                                    <input type="hidden" name="amount" value="@php echo $data['amount']; @endphp">
+                                    <input type="hidden" name="email" value="@php echo $data['email']; @endphp">
+                                    <input type="hidden" name="phone" value="@php echo $data['phone']; @endphp">
+                                    <input type="hidden" name="user_id" value="@php echo $data['user_id']; @endphp">
+                                    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}" data-amount="@php echo ((int)$data['amount']*100); @endphp" data-currency="INR" data-buttontext="Pay @php echo $data['amount']; @endphp INR" data-name="Safarnama" data-description="Dream Travel And Repeat"  data-prefill.name="Safarnama" data-prefill.contact="@php echo $data['phone']; @endphp" data-prefill.email="@php echo $data['email']; @endphp" data-theme.color="#F37254">
+                                    </script>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script>
 </script>
+</html>
