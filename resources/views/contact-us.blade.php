@@ -81,10 +81,9 @@
                         <div class="col-md-9">
                             <!-- Main Content -->
                             <div class="headline">
-                                <h2>Contact Form</h2>
+                                <h2>LEAVE US YOUR INFO</h2>
                             </div>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas feugiat. Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor
-                                sit amet, consectetur adipiscing elit landitiis.</p>
+                            <p>and we will get back to you.</p>
                             <br>
                             <!-- Contact Form -->
                             <form>
@@ -121,25 +120,22 @@
                             <!-- Recent Posts -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Contact Info</h3>
+                                    <h3 class="panel-title">LEAVE US YOUR INFO and we will get back to you.</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <p>Lorem ipsum dolor sit amet, no cetero voluptatum est, audire sensibus maiestatis vis et. Vitae audire prodesset an his. Nulla ubique omnesque in sit.</p>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <i class="fa-phone color-primary"></i>+353-44-55-66</li>
+                                            <i class="fa-phone color-primary"></i>+(91)88888 88888</li>
                                         <li>
-                                            <i class="fa-envelope color-primary"></i>info@example.com</li>
+                                            <i class="fa-envelope color-primary"></i>gowithsafarnama@gmail.com</li>
                                         <li>
-                                            <i class="fa-home color-primary"></i>http://www.example.com</li>
+                                            <i class="fa-home color-primary"></i>http://www.Safarnama.com</li>
                                     </ul>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <strong class="color-primary">Monday-Friday:</strong>9am to 6pm</li>
+                                            <strong class="color-primary">Monday-Saturday:</strong>9am to 6pm</li>
                                         <li>
-                                            <strong class="color-primary">Saturday:</strong>10am to 3pm</li>
-                                        <li>
-                                            <strong class="color-primary">Sunday:</strong>Closed</li>
+                                            <strong class="color-primary">Sunday:</strong>10am to 3pm</li>
                                     </ul>
                                 </div>
                             </div>
@@ -150,7 +146,7 @@
                                     <h3 class="panel-title">About</h3>
                                 </div>
                                 <div class="panel-body">
-                                    Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.
+                                    “Travel is the main thing you purchase that makes you more extravagant”. We, at ‘Safarnama’, swear by this and put stock in satisfying travel dreams that make you perpetually rich constantly.
                                 </div>
                             </div>
                             <!-- End About -->
@@ -214,7 +210,7 @@
                                 <a href="{{ url('assets/Medical-Certificate-SafarNama.pdf') }}"
                                     download="Medical-Certificate-SafarNama.pdf"><button
                                         class="btn btn-primary btn-lg margin-top-20" id="medical"
-                                        type="button">Dowmload</button></a>
+                                        type="button">Download</button></a>
                             </p>
                             <br>
                         </div>

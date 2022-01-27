@@ -366,8 +366,8 @@ class UserController extends Controller
     }
     public function user_booking($id)
     {
-        $bookings = booking::where('user_id','=',$id)->count();
-        if($bookings > 0)
+        $books = booking::where('user_id','=',$id)->count();
+        if($books > 0)
         {
             $data = [];
             $packid = [];
@@ -398,11 +398,11 @@ class UserController extends Controller
                 }
             }
             // return $data;
-            return view('view-bookings', compact('data'));
+            return view('view-bookings', compact('data','books'));
         }
         else
         {
-            return redirect()->route('user.login.success'); 
+            return view('view-bookings', compact('books')); 
         }
     }
     public function payment_page($id)
@@ -433,6 +433,16 @@ class UserController extends Controller
         ])->update(['payment_status' => 'Paid']);
         return redirect()->route('user-booking',$data['user_id']);
     }
+    public function cancel_booking($id)
+    {
+        $data = booking::where('book_id',$id)->get('user_id');
+        foreach ($data as $data) {
+            $user_id = $data['user_id'];
+        }
+        $delete = booking::where('book_id',$id)->delete();
+        return redirect()->route('user-booking',$user_id);
+    }
+
 /********************************************Admin Controls******************************/
     
     public function admin_user_management(Request $req)

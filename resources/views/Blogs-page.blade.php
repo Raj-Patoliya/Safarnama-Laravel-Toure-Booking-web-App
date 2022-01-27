@@ -28,13 +28,8 @@
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
 </head>
 </head>
-
 <body>
     <div id="body-bg">
-        <div id="pre-header" class="container" style="height:340px">
-            <a href="{{ url('/user-login') }}"><button class="btn btn-primary btn-lg margin-top-20"
-                    style="position: fixed;margin-left: 70%;z-index: 99;background: transparent;border: none;">Login?</button></a>
-        </div>
         <div id="header">
             <div class="container">
                 <div class="row">
@@ -239,7 +234,7 @@
                             <a href="{{ url('assets/Medical-Certificate-SafarNama.pdf') }}"
                                 download="Medical-Certificate-SafarNama.pdf"><button
                                     class="btn btn-primary btn-lg margin-top-20" id="medical"
-                                    type="button">Dowmload</button></a>
+                                    type="button">Download</button></a>
                         </p>
                         <br>
                     </div>

@@ -111,21 +111,21 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="{{route('dashboard')}}" class="nav-link active" aria-current="page">
+        <a href="{{route('dashboard')}}" class="nav-link link-dark active" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
       </li>
       <li>
-        <a href="{{route('admin-user-management')}}" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          User Management
+        <a href="{{route('admin-user-blog')}}" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          User's Blogs
         </a>
       </li>
       <li>
-        <a href="{{route('admin-user-blog')}}" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          User Blogs
+        <a href="{{route('admin-package-list')}}" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Package List
         </a>
       </li>
       <li>
@@ -136,18 +136,18 @@
             Add Packages
         </a>
     </li>
-    <li>
-      <a href="{{route('admin-package-list')}}" class="nav-link link-dark">
-        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-        Package List
-      </a>
-    </li>
-    <li>
-      <a href="{{route('admin-booking')}}" class="nav-link link-dark">
-        <i class='fas fa-hotel'></i>
-        Bookings
-      </a>
-    </li>
+      <li>
+        <a href="{{route('admin-user-management')}}" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+          User Management
+        </a>
+      </li>
+      <li>
+        <a href="{{route('admin-booking')}}" class="nav-link link-dark">
+          <i class='fas fa-hotel'></i>
+          Bookings
+        </a>
+      </li>
     </ul>
     <hr>
     <div class="dropdown">
@@ -168,9 +168,12 @@
         </li>
       </ul>
     </div>
+    
   </div>
-  
-  
+  <div for>
+
+  </div>
+  </div>  
 </main>
       <script src="{{url('js/sidebars.js')}}"></script>
       <script src="{{url('js/bootstrap.bundle.min.js')}}"></script>

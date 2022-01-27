@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{url('css/raj.css')}}"> 
     <!-- Bootstrap core CSS -->
 <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
     <style>
       a {
@@ -137,6 +138,12 @@
         <a href="{{route('admin-user-management')}}" class="nav-link link-dark ">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           User Management
+        </a>
+      </li>
+      <li>
+        <a href="{{route('admin-booking')}}" class="nav-link link-dark">
+          <i class='fas fa-hotel'></i>
+          Bookings
         </a>
       </li>
     </ul>

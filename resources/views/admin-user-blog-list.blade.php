@@ -9,6 +9,8 @@
     <title>Safarnama - Admin</title>
     <link rel="stylesheet" href="{{url('css/raj.css')}}"> 
     <!-- Bootstrap core CSS -->
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <style>
@@ -34,7 +36,7 @@
     
     <!-- Custom styles for this template -->
     <link href="{{url('css/sidebars.css')}}" rel="stylesheet">
-    
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   </head>
   <body>
     
@@ -136,6 +138,12 @@
         <a href="{{route('admin-user-management')}}" class="nav-link link-dark active">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           User Management
+        </a>
+      </li>
+      <li>
+        <a href="{{route('admin-booking')}}" class="nav-link link-dark">
+          <i class='fas fa-hotel'></i>
+          Bookings
         </a>
       </li>
     </ul>

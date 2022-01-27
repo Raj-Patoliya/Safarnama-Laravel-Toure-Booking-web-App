@@ -10,6 +10,7 @@
     <title>Safarnama - Admin</title>
     <link rel="stylesheet" href="{{ url('css/raj.css') }}">
     <link rel="stylesheet" href="{{url('css/font-awesome.css')}}" rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -172,6 +173,12 @@
                         User Management
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin-booking')}}" class="nav-link link-dark">
+                      <i class='fas fa-hotel'></i>
+                      Bookings
+                    </a>
+                  </li>
             </ul>
             <hr>
             <div class="dropdown">

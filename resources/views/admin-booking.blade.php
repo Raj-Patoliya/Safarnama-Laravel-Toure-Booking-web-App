@@ -117,15 +117,15 @@
         </a>
       </li>
       <li>
-        <a href="{{route('admin-user-management')}}" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          User Management
+        <a href="{{route('admin-user-blog')}}" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          User's Blogs
         </a>
       </li>
       <li>
-        <a href="{{route('admin-user-blog')}}" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          User Blogs
+        <a href="{{route('admin-package-list')}}" class="nav-link link-dark ">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Package List
         </a>
       </li>
       <li>
@@ -136,18 +136,19 @@
             Add Packages
         </a>
     </li>
-    <li>
-      <a href="{{route('admin-package-list')}}" class="nav-link link-dark">
-        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-        Package List
-      </a>
-    </li>
-    <li>
-      <a href="{{route('admin-booking')}}" class="nav-link link-dark active">
-        <i class='fas fa-hotel'></i>
-        Bookings
-      </a>
-    </li>
+      <li>
+        <a href="{{route('admin-user-management')}}" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+          User Management
+        </a>
+      </li>
+      <li>
+        <a href="{{route('admin-booking')}}" class="nav-link link-dark activeF">
+          <i class='fas fa-hotel'></i>
+          Bookings
+        </a>
+      </li>
+    </ul>
     </ul>
     <hr>
     <div class="dropdown">

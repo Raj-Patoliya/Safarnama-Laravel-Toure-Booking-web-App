@@ -189,7 +189,7 @@
                                 Term & Conditions
                                 <br>MEDICAL CERTIFICATE & NOC
 
-                            <a href="{{url('assets/Medical-Certificate-SafarNama.pdf')}}" download="Medical-Certificate-SafarNama.pdf"><button class="btn btn-primary btn-lg margin-top-20" id="medical"  type="button">Dowmload</button></a>
+                            <a href="{{url('assets/Medical-Certificate-SafarNama.pdf')}}" download="Medical-Certificate-SafarNama.pdf"><button class="btn btn-primary btn-lg margin-top-20" id="medical"  type="button">Download</button></a>
                         </p>
                           <br>
                         </div>

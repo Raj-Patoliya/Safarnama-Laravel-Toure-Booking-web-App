@@ -9,6 +9,8 @@
     <title>Safarnama - Admin</title>
     <link rel="stylesheet" href="{{url('css/raj.css')}}"> 
     <!-- Bootstrap core CSS -->
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <style>
@@ -138,6 +140,12 @@
           User Management
         </a>
       </li>
+      <li>
+        <a href="{{route('admin-booking')}}" class="nav-link link-dark">
+          <i class='fas fa-hotel'></i>
+          Bookings
+        </a>
+      </li>
     </ul>
     <hr>
     <div class="dropdown">
@@ -184,9 +192,9 @@
           <td>  
             <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">Actions</a>
               <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                <li><a class='dropdown-item' href="{{route('admin-package-view',$item->pack_id)}}">View</a></li>
+                {{-- <li><a class='dropdown-item' href="{{route('admin-package-view',$item->pack_id)}}">View</a></li> --}}
                 {{-- <li><hr class="dropdown-divider"></li> --}}
-                <li><a class='dropdown-item' href="{{route('admin-package-edit',$item->pack_id)}}">Edit</a></li>
+                <li><a class='dropdown-item' href="{{route('admin-package-edit',$item->pack_id)}}">Edit or View</a></li>
                 {{-- <li><hr class="dropdown-divider"></li> --}}
                 <li><a class='dropdown-item' href="{{route('admin-package-delete',$item->pack_id)}}">Delete</a></li>
                 </li>

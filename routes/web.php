@@ -50,6 +50,7 @@ Route::match(['get', 'post'],'international-package-page', [UserController::clas
 Route::match(['get', 'post'],'book-package', [UserController::class, 'book_package'])->name('book-package');
 Route::match(['get', 'post'],'payment-page/{id}', [UserController::class, 'payment_page'])->name('payment-page');
 Route::match(['get', 'post'],'payment-paid', [UserController::class, 'payment_paid'])->name('payment-paid');
+Route::match(['get', 'post'],'cancel-booking/{id}', [UserController::class, 'cancel_booking'])->name('cancel-booking');
 
 
 Route::get('apis', function () {
