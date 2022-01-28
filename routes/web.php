@@ -57,7 +57,7 @@ Route::get('apis', function () {
     return view('/');
 });
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('admin-home');
+    return redirect()->route('admin-home');
 })->name('dashboard');
 
 

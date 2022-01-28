@@ -575,15 +575,14 @@ class UserController extends Controller
         }
         return view('admin-user-blog', compact('newdata'));
     }
-    public function admin_home(Request $req)
+    public function admin_home()
     {
-        if ($req->session()->get('email') == 'raj@admin.com' && $req->session()->get('password') == 'Raj@123') {
-            $req->session()->put('email', 'raj@admin.com');
-            $req->session()->put('password', 'Raj@123');
-            return view('admin-home');
-        } else {
-            return redirect('/');
-        }
+        $home['user'] = user_registration::count();
+        $home['post'] = post::count();
+        $home['comment'] = comment::count();
+        $home['package'] = Package::count();
+        $home['booking'] = booking::count();
+        return view('admin-home',compact('home'));
     }
     public function delete_post($id)
     {
