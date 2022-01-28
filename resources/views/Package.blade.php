@@ -471,7 +471,8 @@
         $(function() {
             $("#datepicker").datepicker({
                 dateFormat: "yy-mm-dd",
-                duration: "fast"
+                duration: "fast",
+                minDate: 0
             });
         });
     });

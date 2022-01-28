@@ -206,6 +206,21 @@
                                   
                                   <select name="year" id="" class="btn btn-primary dropdown-toggle">
                                     <option class="dropdown-menu" value="1"><span class="dropdown-item">Year</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1984</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1985</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1986</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1987</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1988</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1989</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1990</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1991</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1992</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1993</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1994</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1995</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1996</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1997</span></option>
+                                    <option  value="1999"><span class="dropdown-item">1998</span></option>
                                     <option  value="1999"><span class="dropdown-item">1999</span></option>
                                     <option  value="2000"><span class="dropdown-item">2000</span></option>
                                     <option  value="2001"><span class="dropdown-item">2001</span></option>
@@ -291,8 +306,6 @@
                     </div>
                 </div>
             </div>
-            <!-- === END CONTENT === -->
-            <!-- === BEGIN FOOTER === -->
             <div id="content-bottom-border" class="container">
             </div>
             <div id="base">
