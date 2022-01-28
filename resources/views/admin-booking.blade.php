@@ -143,7 +143,7 @@
         </a>
       </li>
       <li>
-        <a href="{{route('admin-booking')}}" class="nav-link link-dark activeF">
+        <a href="{{route('admin-booking')}}" class="nav-link link-dark active">
           <i class='fas fa-hotel'></i>
           Bookings
         </a>

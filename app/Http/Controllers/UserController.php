@@ -450,6 +450,13 @@ class UserController extends Controller
         $user = user_registration::all();
         return view('admin-user-management', compact('user'));
     }
+    public function admin_user_delete($id)
+    {
+        $deletepost = post::where('user_id',$id)->delete();
+        $deletecomment =  comment::where('user_id',$id)->delete();
+        $deleteuser = user_registration::where('user_id',$id)->delete();
+        return redirect()->route('admin-user-management');   
+    }
     
     public function admin_user_blog_list(Request $req, $id)
     {

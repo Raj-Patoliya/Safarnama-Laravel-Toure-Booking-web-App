@@ -7,6 +7,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Safarnama - Admin</title>
+    <link rel="stylesheet" href="{{ url('css/font-awesome.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{url('css/raj.css')}}">
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>

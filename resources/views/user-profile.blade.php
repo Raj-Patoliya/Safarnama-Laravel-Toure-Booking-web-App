@@ -209,16 +209,6 @@
                                     <a class='btn btn-success btn-lg' href="{{route('user-booking',Session::get('user_id'))}}">Bookings</a>
                             </div>
                         </div>
-                        <div class="card card-white grid-margin">
-                            <div class="card-heading clearfix">
-                                <h4 class="card-title">Some Info</h4>
-                            </div>
-                            <div class="card-body">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis
-                                    architecto.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- Row -->
