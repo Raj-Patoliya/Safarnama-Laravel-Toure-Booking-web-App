@@ -8,7 +8,7 @@
 
 <head>
     <!-- Title -->
-    <title>Lifestyle - Professional Bootstrap Template</title>
+    <title>Safarnama</title>
     <!-- Meta -->
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="">

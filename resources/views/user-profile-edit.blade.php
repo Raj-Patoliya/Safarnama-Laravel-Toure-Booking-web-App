@@ -7,7 +7,7 @@
     <!--<![endif]-->
     <head>
         <!-- Title -->
-        <title>Lifestyle - Professional Bootstrap Template</title>
+        <title>Safarnama</title>
         <!-- Meta -->
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="">
@@ -229,6 +229,22 @@
     
     <script>
         $(document).ready(function() {
+            $('#cpass').focusout(function (){
+            var pass = $('#pass').val();            
+            var cpass = $('#cpass').val();
+            if( cpass == pass)
+            {
+                $('#submit').removeAttr('disabled');
+                $('#pass').css( "border-color",'' );
+                $('#cpass').css( "border-color",'' );
+            }
+            else
+            {
+                $('#pass').css( "border-color",'red' );
+                $('#cpass').css( "border-color",'red' );
+                alert("Make sure password and Confrim password are same....");            
+            }
+            });
             $("#show_hide_password a").on('click', function(event) {
         event.preventDefault();
         if($('#show_hide_password input').attr("type") == "text"){
